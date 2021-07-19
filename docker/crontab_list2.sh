@@ -54,3 +54,5 @@
 10 0-21/3 * * * node /scripts/jd_joy_steal.js >> /scripts/logs/jd_joy_steal.log 2>&1
 # 宠汪汪兑换
 0 0,8,12,16 * * * node /scripts/jd_joy_reward.js >> /scripts/logs/jd_joy_reward.log 2>&1
+# 签到领现金
+27 7,15,23 * * * node /scripts/jd_cash.js >> /scripts/logs/jd_cash.log 2>&1
