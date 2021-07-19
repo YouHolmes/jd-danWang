@@ -52,8 +52,8 @@ if ($.isNode()) {
     return;
   }
   console.log('惊喜牧场\n' +
-      '活动入口：京喜APP-我的-京喜牧场\n' +
-      '温馨提示：请先手动完成【新手指导任务】再运行脚本');
+    '活动入口：京喜APP-我的-京喜牧场\n' +
+    '温馨提示：请先手动完成【新手指导任务】再运行脚本');
   for (let i = 0; i < cookiesArr.length; i++) {
     $.index = i + 1;
     $.cookie = cookiesArr[i];
@@ -109,12 +109,12 @@ if ($.isNode()) {
     }
   }
 })()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.done();
-    })
+  .catch((e) => {
+    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+  })
+  .finally(() => {
+    $.done();
+  })
 
 async function pasture() {
   try {
@@ -132,13 +132,7 @@ async function pasture() {
       console.log('获取活动信息成功');
       console.log(`互助码：${$.homeInfo.sharekey}`);
       $.helpCkList.push($.cookie);
-      $.inviteCodeList.push(
-          {
-            'use':$.UserName,
-            'code':$.homeInfo.sharekey,
-            'max':false
-          }
-      );
+      $.inviteCodeList.push({'use':$.UserName,'code':$.homeInfo.sharekey,'max':false});
       for (let i = 0; i < $.homeInfo.petinfo.length; i++) {
         $.onepetInfo = $.homeInfo.petinfo[i];
         $.petidList.push($.onepetInfo.petid);
@@ -150,7 +144,26 @@ async function pasture() {
       }
       $.crowInfo = $.homeInfo.cow;
     }
-
+    $.GetVisitBackInfo = {};
+    await $.wait(2000);
+    await takeGetRequest('GetVisitBackInfo');
+    if($.GetVisitBackInfo.iscandraw === 1){
+      await $.wait(2000);
+      await takeGetRequest('GetVisitBackCabbage');
+    }
+    await $.wait(2000);
+    $.GetSignInfo = {};
+    await takeGetRequest('GetSignInfo');
+    if(JSON.stringify($.GetSignInfo) !== '{}' && $.GetSignInfo.signlist){
+      let signList = $.GetSignInfo.signlist;
+      for (let j = 0; j < signList.length; j++) {
+        if(signList[j].fortoday && !signList[j].hasdone){
+          await $.wait(2000);
+          console.log(`去签到`);
+          await takeGetRequest('GetSignReward');
+        }
+      }
+    }
     await $.wait(2000);
     if ($.crowInfo.lastgettime) {
       console.log('收奶牛金币');
@@ -309,68 +322,73 @@ async function takeGetRequest(type) {
     case 'GetHomePageInfo':
       url = `https://m.jingxi.com/jxmc/queryservice/GetHomePageInfo?channel=7&sceneid=1001&isgift=1&_stk=channel%2Csceneid&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`GetHomePageInfo`, url);
       break;
     case 'GetUserTaskStatusList':
       https://m.jingxi.com/newtasksys/newtasksys_front/GetUserTaskStatusList?_=1623404693642&source=jxmc&bizCode=jxmc&dateType=2&_stk=bizCode%2CdateType%2Csource&_ste=1&h5st=20210611174453641%3B3318642450258161%3B10028%3Btk01wee9f1d10a8nYmhQQlNzY2xlsYpdY%2Bxhj35GxtolIx4wFvjVz6e0Er7jCXJ5Jka9MBfjUruSe17Rs6IkhS9KYvAS%3B2bdb6c7cd6b475b87da7d58d7c743a87df10b6a76ebb0e8f3bb717ac366d7fbe&sceneval=2&g_login_type=1&g_ty=ajax
-          url = `https://m.jingxi.com/newtasksys/newtasksys_front/GetUserTaskStatusList?_=${Date.now() + 2}&source=jxmc&bizCode=jxmc&dateType=${$.dateType}&_stk=bizCode%2CdateType%2Csource&_ste=1`;
+        url = `https://m.jingxi.com/newtasksys/newtasksys_front/GetUserTaskStatusList?_=${Date.now() + 2}&source=jxmc&bizCode=jxmc&dateType=${$.dateType}&_stk=bizCode%2CdateType%2Csource&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&sceneval=2&g_login_type=1&g_ty=ajax`;
-      myRequest = getGetRequest(`GetUserTaskStatusList`, url);
       break;
     case 'mowing': //割草
       url = `https://m.jingxi.com/jxmc/operservice/Action?channel=7&sceneid=1001&type=2&_stk=channel%2Csceneid%2Ctype&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`mowing`, url);
       break;
     case 'GetSelfResult':
       url = `https://m.jingxi.com/jxmc/operservice/GetSelfResult?channel=7&sceneid=1001&type=14&itemid=undefined&_stk=channel%2Csceneid%2Ctype&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`GetSelfResult`, url);
       break;
     case 'jump':
       let sar = Math.floor((Math.random() * $.petidList.length));
       url = `https://m.jingxi.com/jxmc/operservice/Action?channel=7&sceneid=1001&type=1&petid=${$.petidList[sar]}&_stk=channel%2Cpetid%2Csceneid%2Ctype&_ste=1`
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`jump`, url);
       break;
     case 'DoTask':
       url = `https://m.jingxi.com/newtasksys/newtasksys_front/DoTask?_=${Date.now() + 2}&source=jxmc&taskId=${$.oneTask.taskId}&bizCode=jxmc&configExtra=&_stk=bizCode%2CconfigExtra%2Csource%2CtaskId&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}` + `&sceneval=2&g_login_type=1&g_ty=ajax`;
-      myRequest = getGetRequest(`DoTask`, url);
       break;
     case 'Award':
       url = `https://m.jingxi.com/newtasksys/newtasksys_front/Award?_=${Date.now() + 2}&source=jxmc&taskId=${$.oneTask.taskId}&bizCode=jxmc&_stk=bizCode%2Csource%2CtaskId&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}` + `&sceneval=2&g_login_type=1&g_ty=ajax`;
-      myRequest = getGetRequest(`Award`, url);
       break;
     case 'cow':
       url = `https://m.jingxi.com/jxmc/operservice/GetCoin?channel=7&sceneid=1001&token=${A($.crowInfo.lastgettime)}&_stk=channel%2Csceneid%2Ctoken&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`cow`, url);
       break;
     case 'buy':
       url = `https://m.jingxi.com/jxmc/operservice/Buy?channel=7&sceneid=1001&type=1&_stk=channel%2Csceneid%2Ctype&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`cow`, url);
       break;
     case 'feed':
       url = `https://m.jingxi.com/jxmc/operservice/Feed?channel=7&sceneid=1001&_stk=channel%2Csceneid&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`cow`, url);
       break;
     case 'GetEgg':
       url = `https://m.jingxi.com/jxmc/operservice/GetSelfResult?channel=7&sceneid=1001&type=11&itemid=${$.onepetInfo.petid}&_stk=channel%2Citemid%2Csceneid%2Ctype&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`GetEgg`, url);
       break;
     case 'help':
       url = `https://m.jingxi.com/jxmc/operservice/EnrollFriend?sharekey=${$.oneCodeInfo.code}&channel=7&sceneid=1001&_stk=channel%2Csceneid%2Csharekey&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
-      myRequest = getGetRequest(`help`, url);
+      break;
+    case 'GetVisitBackInfo':
+      url = `https://m.jingxi.com/jxmc/queryservice/GetVisitBackInfo?channel=7&sceneid=1001&_stk=channel%2Csceneid&_ste=1`;
+      url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
+      break;
+    case 'GetVisitBackCabbage':
+      url = `https://m.jingxi.com/jxmc/operservice/GetVisitBackCabbage?channel=7&sceneid=1001&_stk=channel%2Csceneid&_ste=1`;
+      url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
+      break;
+    case 'GetSignInfo':
+      url = `https://m.jingxi.com/jxmc/queryservice/GetSignInfo?channel=7&sceneid=1001&_stk=channel%2Csceneid&_ste=1`;
+      url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
+      break;
+    case 'GetSignReward':
+      url = `https://m.jingxi.com/jxmc/operservice/GetSignReward?channel=7&sceneid=1001&currdate=${$.GetSignInfo.currdate}&_stk=channel%2Ccurrdate%2Csceneid&_ste=1`;
+      url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
       break;
     default:
       console.log(`错误${type}`);
   }
+  myRequest = getGetRequest(url);
   return new Promise(async resolve => {
     $.get(myRequest, (err, resp, data) => {
       try {
@@ -490,12 +508,37 @@ function dealReturn(type, data) {
         console.log(JSON.stringify(data))
       }
       break;
+    case 'GetVisitBackInfo':
+      data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1]);
+      if (data.ret === 0) {
+        $.GetVisitBackInfo = data.data;
+      }
+      //console.log(JSON.stringify(data));
+      break;
+    case 'GetVisitBackCabbage':
+      data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1]);
+      if (data.ret === 0) {
+        console.log(`收取白菜成功，获得${data.data.drawnum}`);
+      }
+      break;
+    case 'GetSignInfo':
+      data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1]);
+      if (data.ret === 0) {
+        $.GetSignInfo = data.data;
+      }
+      break;
+    case 'GetSignReward':
+      data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1]);
+      if (data.ret === 0) {
+        console.log(`签到成功`);
+      }
+      break;
     default:
       console.log(JSON.stringify(data));
   }
 }
 
-function getGetRequest(type, url) {
+function getGetRequest(url) {
   let ua = ``;
   if(JXUserAgent){
     ua = JXUserAgent;
@@ -520,8 +563,8 @@ function getGetRequest(type, url) {
 
 function randomWord(randomFlag, min, max){
   var str = "",
-      range = min,
-      arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    range = min,
+    arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
   // 随机产生
   if(randomFlag){
@@ -623,18 +666,18 @@ async function requestAlgo() {
 
 Date.prototype.Format = function (fmt) {
   var e,
-      n = this, d = fmt, l = {
-        "M+": n.getMonth() + 1,
-        "d+": n.getDate(),
-        "D+": n.getDate(),
-        "h+": n.getHours(),
-        "H+": n.getHours(),
-        "m+": n.getMinutes(),
-        "s+": n.getSeconds(),
-        "w+": n.getDay(),
-        "q+": Math.floor((n.getMonth() + 3) / 3),
-        "S+": n.getMilliseconds()
-      };
+    n = this, d = fmt, l = {
+      "M+": n.getMonth() + 1,
+      "d+": n.getDate(),
+      "D+": n.getDate(),
+      "h+": n.getHours(),
+      "H+": n.getHours(),
+      "m+": n.getMinutes(),
+      "s+": n.getSeconds(),
+      "w+": n.getDay(),
+      "q+": Math.floor((n.getMonth() + 3) / 3),
+      "S+": n.getMilliseconds()
+    };
   /(y+)/i.test(d) && (d = d.replace(RegExp.$1, "".concat(n.getFullYear()).substr(4 - RegExp.$1.length)));
   for (var k in l) {
     if (new RegExp("(".concat(k, ")")).test(d)) {
