@@ -99,12 +99,12 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 async function joyReward() {
   try {
-    let timel = new Date().Format("ss")
-    let timea = 59;
-    if(timel < 59) {
-      let timec = (timea - timel) * 1000;
-      console.log(`等待时间 ${timec / 1000}`);
-      await zooFaker.sleep(timec)
+    let nowtime = new Date().Format("ss")
+    let starttime = process.env.JOY_STARTTIME ? process.env.JOY_STARTTIME : 59;
+    if(nowtime < 59) {
+      let sleeptime = (starttime - nowtime) * 1000;
+      console.log(`等待时间 ${sleeptime / 1000}`);
+      await zooFaker.sleep(sleeptime)
     }
     for (let j = 0; j <= 10; j++) {
       await getExchangeRewards();
