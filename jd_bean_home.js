@@ -20,7 +20,15 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://api.m.jd.com/';
 !(async () => {
   $.newShareCodes = []
-  $.authorCode = []
+  $.authorCode = [
+      '949D23BA4BF155E896ED2741E763777A',
+      '6C177B528326CE25E235892EADA721B9AD1DAAB9A3E3F6CBAFDE81EEB7393333',
+      'E0D615F28CF0B201D5244D6C12F7A8FD',
+      '7CD6B2A0B1621FCA9F9286A10D1276F8AD1DAAB9A3E3F6CBAFDE81EEB7393333',
+      '35AD168859F2C38C31BF96C538BB1D03AD1DAAB9A3E3F6CBAFDE81EEB7393333',
+      'A582C750896BD0570150BB28F2142A84',
+      'FF48BA00E268024691968622DF67A839'
+  ]
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
@@ -52,19 +60,7 @@ const JD_API_HOST = 'https://api.m.jd.com/';
       cookie = cookiesArr[i];
       $.canHelp = true;
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-      if ($.newShareCodes.length > 1) {
-        console.log(`\n【抢京豆】 ${$.UserName} 去助力排名第一的cookie`);
-        // let code = $.newShareCodes[(i + 1) % $.newShareCodes.length]
-        // await help(code[0], code[1])
-        let code = $.newShareCodes[0];
-        if(code[2] && code[2] ===  $.UserName){
-          //不助力自己
-        } else {
-          await help(code[0], code[1]);
-        }
-      }
-      /*if (helpAuthor && $.authorCode && $.canHelp) {
-        console.log(`\n【抢京豆】${$.UserName} 去帮助作者`)
+      if ($.authorCode) {
         for (let code of $.authorCode) {
           const helpRes = await help(code.shareCode, code.groupCode);
           if (helpRes && helpRes['code'] === '0') {
@@ -76,7 +72,18 @@ const JD_API_HOST = 'https://api.m.jd.com/';
             console.log(`助力异常:${JSON.stringify(helpRes)}\n`);
           }
         }
-      }*/
+      }
+      if ($.newShareCodes.length > 1) {
+        console.log(`\n【抢京豆】 ${$.UserName} 去助力排名第一的cookie`);
+        // let code = $.newShareCodes[(i + 1) % $.newShareCodes.length]
+        // await help(code[0], code[1])
+        let code = $.newShareCodes[0];
+        if(code[2] && code[2] ===  $.UserName){
+          //不助力自己
+        } else {
+          await help(code[0], code[1]);
+        }
+      }
       for (let j = 1; j < $.newShareCodes.length && $.canHelp; j++) {
         let code = $.newShareCodes[j];
         if(code[2] && code[2] ===  $.UserName){
