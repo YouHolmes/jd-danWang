@@ -1,25 +1,4 @@
-/*
-领京豆额外奖励&抢京豆
-脚本自带助力码，介意者可将 29行 helpAuthor 变量设置为 false
-活动入口：京东APP首页-领京豆
-更新地址：https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bean_home.js
-已支持IOS双京东账号, Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
-============Quantumultx===============
-[task_local]
-#领京豆额外奖励
-10 7 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bean_home.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
 
-================Loon==============
-[Script]
-cron "10 7 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bean_home.js, tag=领京豆额外奖励
-
-===============Surge=================
-领京豆额外奖励 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bean_home.js
-
-============小火箭=========
-领京豆额外奖励 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_bean_home.js, cronexpr="10 7 * * *", timeout=3600, enable=true
- */
 const $ = new Env('领京豆额外奖励');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -41,7 +20,7 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://api.m.jd.com/';
 !(async () => {
   $.newShareCodes = []
-  //await getAuthorShareCode();
+  $.authorCode = []
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
@@ -67,50 +46,56 @@ const JD_API_HOST = 'https://api.m.jd.com/';
       await jdBeanHome();
     }
   }
-  // for (let i = 0; i < cookiesArr.length; i++) {
-  //   $.index = i + 1;
-  //   if (cookiesArr[i]) {
-  //     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-  //     cookie = cookiesArr[i];
-  //     if ($.newShareCodes.length > 1) {
-  //       console.log(`\n【抢京豆】 ${$.UserName} 去助力排名第一的cookie`);
-  //       // let code = $.newShareCodes[(i + 1) % $.newShareCodes.length]
-  //       // await help(code[0], code[1])
-  //       let code = $.newShareCodes[0];
-  //       await help(code[0], code[1]);
-  //     }
-  //     if (helpAuthor && $.authorCode) {
-  //       console.log(`\n【抢京豆】${$.UserName} 去帮助wuzhi03`)
-  //       for (let code of $.authorCode) {
-  //         const helpRes = await help(code.shareCode, code.groupCode);
-  //         if (helpRes && helpRes.data.respCode === 'SG209') {
-  //           break;
-  //         }
-  //       }
-  //     }
-  //     if (helpAuthor && $.authorCode2) {
-  //       for (let code of $.authorCode2) {
-  //         const helpRes = await help(code.shareCode, code.groupCode);
-  //         if (helpRes && helpRes.data.respCode === 'SG209') {
-  //           console.log(`助力次数已耗尽，跳出助力`)
-  //           break;
-  //         }
-  //       }
-  //     }
-  //     for (let j = 1; j < $.newShareCodes.length; j++) {
-  //       console.log(`【抢京豆】${$.UserName} 去助力账号 ${j + 1}`)
-  //       let code = $.newShareCodes[j];
-  //       await help(code[0], code[1])
-  //     }
-  //   }
-  // }
+  for (let i = 0; i < cookiesArr.length; i++) {
+    $.index = i + 1;
+    if (cookiesArr[i]) {
+      cookie = cookiesArr[i];
+      $.canHelp = true;
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      if ($.newShareCodes.length > 1) {
+        console.log(`\n【抢京豆】 ${$.UserName} 去助力排名第一的cookie`);
+        // let code = $.newShareCodes[(i + 1) % $.newShareCodes.length]
+        // await help(code[0], code[1])
+        let code = $.newShareCodes[0];
+        if(code[2] && code[2] ===  $.UserName){
+          //不助力自己
+        } else {
+          await help(code[0], code[1]);
+        }
+      }
+      /*if (helpAuthor && $.authorCode && $.canHelp) {
+        console.log(`\n【抢京豆】${$.UserName} 去帮助作者`)
+        for (let code of $.authorCode) {
+          const helpRes = await help(code.shareCode, code.groupCode);
+          if (helpRes && helpRes['code'] === '0') {
+            if (helpRes && helpRes.data && helpRes.data.respCode === 'SG209') {
+              console.log(`${helpRes.data.helpToast}\n`);
+              break;
+            }
+          } else {
+            console.log(`助力异常:${JSON.stringify(helpRes)}\n`);
+          }
+        }
+      }*/
+      for (let j = 1; j < $.newShareCodes.length && $.canHelp; j++) {
+        let code = $.newShareCodes[j];
+        if(code[2] && code[2] ===  $.UserName){
+          //不助力自己
+        } else {
+          console.log(`【抢京豆】${$.UserName} 去助力账号 ${j + 1}`);
+          await help(code[0], code[1]);
+          await $.wait(2000);
+        }
+      }
+    }
+  }
 })()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.done();
-    })
+  .catch((e) => {
+    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+  })
+  .finally(() => {
+    $.done();
+  })
 
 async function jdBeanHome() {
   await invite()
@@ -140,36 +125,36 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 function doTask2() {
-  return new Promise(resolve => {
-    const body = {"awardFlag": false, "skuId": `${getRandomInt(10000000,20000000)}`, "source": "feeds", "type": '1'};
-    $.post(taskUrl('beanHomeTask', body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data);
-            if (data.code === '0' && data.data){
-              console.log(`任务完成进度：${data.data.taskProgress} / ${data.data.taskThreshold}`)
-              if(data.data.taskProgress === data.data.taskThreshold)
+    return new Promise(resolve => {
+      const body = {"awardFlag": false, "skuId": `${getRandomInt(10000000,20000000)}`, "source": "feeds", "type": '1'};
+      $.post(taskUrl('beanHomeTask', body), (err, resp, data) => {
+        try {
+          if (err) {
+            console.log(`${JSON.stringify(err)}`)
+            console.log(`${$.name} API请求失败，请检查网路重试`)
+          } else {
+            if (safeGet(data)) {
+              data = JSON.parse(data);
+              if (data.code === '0' && data.data){
+                console.log(`任务完成进度：${data.data.taskProgress} / ${data.data.taskThreshold}`)
+                if(data.data.taskProgress === data.data.taskThreshold)
+                  $.doneState = true
+              } else if (data.code === '0' && data.errorCode === 'HT201') {
                 $.doneState = true
-            } else if (data.code === '0' && data.errorCode === 'HT201') {
-              $.doneState = true
-            } else {
-              //HT304风控用户
-              $.doneState = true
-              console.log(`做任务异常：${JSON.stringify(data)}`)
+              } else {
+                //HT304风控用户
+                $.doneState = true
+                console.log(`做任务异常：${JSON.stringify(data)}`)
+              }
             }
           }
+        } catch (e) {
+          $.logErr(e, resp)
+        } finally {
+          resolve();
         }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
+      })
     })
-  })
 }
 
 function getAuthorShareCode() {

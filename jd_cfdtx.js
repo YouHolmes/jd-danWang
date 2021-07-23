@@ -36,16 +36,14 @@ $.showLog = $.getdata("cfd_showLog") ? $.getdata("cfd_showLog") === "true" : fal
 $.notifyTime = $.getdata("cfd_notifyTime");
 $.result = [];
 $.shareCodes = [];
-let cookiesArr = [], cookie = '', token;
+let cookiesArr = [], cookie = '', token, nowTimes;
 let allMessage = '', message = ''
-$.money = 0
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
-  if (JSON.stringify(process.env).indexOf('GITHUB') > -1) process.exit(0);
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
@@ -64,7 +62,6 @@ Date.prototype.Format = function (fmt) { //author: meizz
     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
   return fmt;
 }
-let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000)
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -90,7 +87,9 @@ let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 
         }
         continue
       }
+      $.num = i
       $.info = {}
+      $.money = 0
       token = await getJxToken()
       await cfd();
     }
@@ -104,9 +103,10 @@ let nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 
 
 async function cfd() {
   try {
+    nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000)
     if ((nowTimes.getHours() === 11 || nowTimes.getHours() === 23) && nowTimes.getMinutes() === 59) {
-      let nowtime = new Date().Format("ss")
-      let starttime = process.env.CFD_STARTTIME ? process.env.CFD_STARTTIME : 60;
+      let nowtime = new Date().Format("s.S")
+      let starttime = $.isNode() ? (process.env.CFD_STARTTIME ? process.env.CFD_STARTTIME * 1 : 60) : ($.getdata('CFD_STARTTIME') ? $.getdata('CFD_STARTTIME') * 1 : 60);
       if(nowtime < 59) {
         let sleeptime = (starttime - nowtime) * 1000;
         console.log(`等待时间 ${sleeptime / 1000}\n`);
@@ -118,6 +118,11 @@ async function cfd() {
     if (beginInfo.Fund.ddwFundTargTm === 0) {
       console.log(`还未开通活动，请先开通\n`)
       return
+    }
+
+    if ($.num % 2 !== 0) {
+      console.log(`等待`)
+      await $.wait(2000)
     }
 
     console.log(`获取提现资格`)
@@ -169,6 +174,7 @@ async function userCashOutState(type = true) {
           if (type) {
             if (data.dwTodayIsCashOut !== 1) {
               if (data.ddwUsrTodayGetRich >= data.ddwTodayTargetUnLockRich) {
+                nowTimes = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000)
                 if (nowTimes.getHours() >= 0 && nowTimes.getHours() < 12) {
                   data.UsrCurrCashList = data.UsrCurrCashList.filter((x) => x.ddwMoney / 100 >= 1)
                 } else if (nowTimes.getHours() === 12 && nowTimes.getMinutes() <= 10) {
@@ -184,6 +190,8 @@ async function userCashOutState(type = true) {
                     } else {
                       await userCashOutState()
                     }
+                  } else {
+                    console.log(`${vo.ddwMoney / 100}元库存不足`)
                   }
                 }
               } else {

@@ -73,11 +73,6 @@ $.appId = 10028;
   await requestAlgo();
   await $.wait(1000)
   let res = []
-  // if (!res) {
-  //   $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
-  //   await $.wait(1000)
-  //   res = await getAuthorShareCode('')
-  // }
   $.strMyShareIds = [...(res && res.shareId || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -167,7 +162,7 @@ async function cfd() {
       let vo = $.info.buildInfo.buildList[key]
       let body = `strBuildIndex=${vo.strBuildIndex}`
       await getBuildInfo(body, vo)
-      await $.wait(1000)
+      await $.wait(2000)
     }
 
     //合成珍珠
@@ -528,7 +523,7 @@ async function querystorageroom(dwSceneId) {
                 strTypeCnt += `${bags[j]}|`
               }
             }
-            await $.wait(1000)
+            await $.wait(2000)
             await sellgoods(`strTypeCnt=${strTypeCnt}&dwSceneId=${dwSceneId}`)
           } else {
             console.log(`背包是空的，快去捡贝壳吧\n`)
@@ -585,7 +580,7 @@ async function getTakeAggrPage(type) {
                   if (vo.dwStatus !== 1) {
                     const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}`
                     await rewardSign(body)
-                    await $.wait(1000)
+                    await $.wait(2000)
                   } else {
                     console.log(`今日已签到\n`)
                     break
@@ -916,7 +911,7 @@ async function employTourGuideInfo() {
               }
               const body = `strBuildIndex=${vo.strBuildIndex}&dwIsFree=${dwIsFree}&ddwConsumeCoin=${vo.ddwCostCoin}`
               await employTourGuide(body, buildNmae)
-              await $.wait(1000)
+              await $.wait(2000)
             } else if (vo.strBuildIndex !== 'food') {
               console.log(`【${buildNmae}】无可雇佣导游`)
             }
@@ -1283,7 +1278,7 @@ function browserTask(taskType) {
           } else {
             //领奖励
             await awardTask(1, taskinfo);
-            await $.wait(1000);
+            await $.wait(2000);
           }
         }
         break;
