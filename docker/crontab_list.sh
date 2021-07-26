@@ -72,6 +72,10 @@
 21 9 * * * node /scripts/jd_MMdou.js >> /scripts/logs/jd_MMdou.log 2>&1
 #全民抢京豆
 1 0,1 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
+# jd_summer_movement
+12 0,6-23/2 * * * node /scripts/jd_summer_movements.js >> /scripts/logs/jd_summer_movements.log 2>&1
+# jd_summer_movement_help
+14/41 7-14 * * * node /scripts/jd_summer_movement_help.js >> /scripts/logs/jd_summer_movement_help.log 2>&1
 
 ##############长期活动##############
 # 签到
