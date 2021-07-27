@@ -15,20 +15,20 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //惊喜APP的UA。领取助力任务奖励需要惊喜APP的UA,环境变量：JX_USER_AGENT，有能力的可以填上自己的UA
 const JXUserAgent =  $.isNode() ? (process.env.JX_USER_AGENT ? process.env.JX_USER_AGENT : ``):``;
 $.inviteCodeList = [
-    'wVMW-xbLJ5igeuUvrUXoJLXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
-    'wVMW-xbLJ5igeuUvrUXoJESNHATXT18BkM7jh1zOOGnTymePRHvaTQETgWh_Waw2',
-    'wVMW-xbLJ5igeuUvrUXoJJyeOjBWGMkn3gpx-BKaaPA_J9xStzTjB9yffTgLwSnU',
-    'wVMW-xbLJ5igeuUvrUXoJMP3AC6fonLo29SgRHl5C80Q1OTeMGtW2bMVYbLv98go',
-    'wVMW-xbLJ5igeuUvrUXoJAFlD8pJ4oooqgV-fG_uNUWXoqoGz2N52v3MSySXgCke',
-    'wVMW-xbLJ5igeuUvrUXoJGBGHc3UrSHsxD_nLl_miVI',
-    'wVMW-xbLJ5igeuUvrUXoJINEuQoIDssAsctAum3rRmQHy5xJoh7NvfV6x6KSL7dt',
-    'wVMW-xbLJ5igeuUvrUXoJBKYDZSU2vS9exAJ4Wc524l1Ffe2U484vy5GrKcjlRVW',
-    'wVMW-xbLJ5igeuUvrUXoJFyLXlL86WiHBTJvW0Ngeoc',
-    'wVMW-xbLJ5igeuUvrUXoJHsZ68Fif_8Nb_PzfTkxqhWFxi6BGQHznYYNi269OW61',
-    'wVMW-xbLJ5igeuUvrUXoJAJsjJekq_ER_DVLDaQQSqM',
-    'wVMW-xbLJ5igeuUvrUXoJMNlTgxW2gq6B981Lzm4p80',
-    'wVMW-xbLJ5igeuUvrUXoJO3tRlQxV4RS1rxXmddzy1FtfG2UnaZjSNm0gR2CSLuQ',
-    'wVMW-xbLJ5igeuUvrUXoJHzX7yCmFyXgCq-hKuCUt-cc-bmgUMDCqkfCPfba7C04'
+    'sA0J0amfPeyFqzbgvE-y2rXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
+    'sA0J0amfPeyFqzbgvE-y2rYuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
+    'sA0J0amfPeyFqzbgvE-y2kSNHATXT18BkM7jh1zOOGnTymePRHvaTQETgWh_Waw2',
+    'sA0J0amfPeyFqzbgvE-y2pyeOjBWGMkn3gpx-BKaaPA_J9xStzTjB9yffTgLwSnU',
+    'sA0J0amfPeyFqzbgvE-y2sP3AC6fonLo29SgRHl5C80Q1OTeMGtW2bMVYbLv98go',
+    'sA0J0amfPeyFqzbgvE-y2gFlD8pJ4oooqgV-fG_uNUWXoqoGz2N52v3MSySXgCke',
+    'sA0J0amfPeyFqzbgvE-y2mBGHc3UrSHsxD_nLl_miVI',
+    'sA0J0amfPeyFqzbgvE-y2hKYDZSU2vS9exAJ4Wc524l1Ffe2U484vy5GrKcjlRVW',
+    'sA0J0amfPeyFqzbgvE-y2lyLXlL86WiHBTJvW0Ngeoc',
+    'sA0J0amfPeyFqzbgvE-y2nsZ68Fif_8Nb_PzfTkxqhWFxi6BGQHznYYNi269OW61',
+    'sA0J0amfPeyFqzbgvE-y2gJsjJekq_ER_DVLDaQQSqM',
+    'sA0J0amfPeyFqzbgvE-y2sNlTgxW2gq6B981Lzm4p80',
+    'sA0J0amfPeyFqzbgvE-y2u3tRlQxV4RS1rxXmddzy1FtfG2UnaZjSNm0gR2CSLuQ',
+    'sA0J0amfPeyFqzbgvE-y2nzX7yCmFyXgCq-hKuCUt-cc-bmgUMDCqkfCPfba7C04'
 ];
 let cookiesArr = [];
 $.appId = 10028;
@@ -81,7 +81,7 @@ if ($.isNode()) {
   for (let i = 0; i < newCookiesArr.length; i++) {
     let thisCookiesArr = newCookiesArr[i];
     let codeList = [];
-    for (let j = 0; j < thisCookiesArr.length; j++) {
+    /*for (let j = 0; j < thisCookiesArr.length; j++) {
       $.cookie = thisCookiesArr[j];
       $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
       for (let k = 0; k < $.inviteCodeList.length; k++) {
@@ -92,19 +92,16 @@ if ($.isNode()) {
           });
         }
       }
-    }
+    }*/
+    console.log('账号' + (i + 1) + '开始助力：');
     for (let j = 0; j < thisCookiesArr.length; j++) {
       $.cookie = thisCookiesArr[j];
       $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
-      for (let k = 0; k < codeList.length; k++) {
-        $.oneCodeInfo = codeList[k];
-        if(codeList[k].name === $.UserName){
-          continue;
-        }else{
-          console.log(`\n${$.UserName}去助力${codeList[k].name},助力码：${codeList[k].code}\n`);
-          await takeGetRequest('help');
-          await $.wait(2000);
-        }
+      for (let k = 0; k < $.inviteCodeList.length; k++) {
+        $.oneCodeInfo = $.inviteCodeList[k];
+        console.log('被助力码：' + $.oneCodeInfo);
+        await takeGetRequest('help');
+        await $.wait(2000);
       }
     }
   }
@@ -132,7 +129,7 @@ async function pasture() {
       console.log('获取活动信息成功');
       console.log(`互助码：${$.homeInfo.sharekey}`);
       $.helpCkList.push($.cookie);
-      $.inviteCodeList.push({'use':$.UserName,'code':$.homeInfo.sharekey,'max':false});
+      $.inviteCodeList.push($.homeInfo.sharekey);
       for (let i = 0; i < $.homeInfo.petinfo.length; i++) {
         $.onepetInfo = $.homeInfo.petinfo[i];
         $.petidList.push($.onepetInfo.petid);
@@ -366,7 +363,7 @@ async function takeGetRequest(type) {
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
       break;
     case 'help':
-      url = `https://m.jingxi.com/jxmc/operservice/EnrollFriend?sharekey=${$.oneCodeInfo.code}&channel=7&sceneid=1001&_stk=channel%2Csceneid%2Csharekey&_ste=1`;
+      url = `https://m.jingxi.com/jxmc/operservice/EnrollFriend?sharekey=${$.oneCodeInfo}&channel=7&sceneid=1001&_stk=channel%2Csceneid%2Csharekey&_ste=1`;
       url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&callback=jsonpCBK${String.fromCharCode(Math.floor(Math.random() * 26) + "A".charCodeAt(0))}&g_ty=ls`;
       break;
     case 'GetVisitBackInfo':
