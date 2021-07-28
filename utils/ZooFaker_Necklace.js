@@ -566,7 +566,7 @@ let utils = {
         var encrypt_id = this.decipherJoyToken(appid + $.joyToken, appid)["encrypt_id"].split(",");
         var nonce_str = this.getRandomWord(10);
         // nonce_str="iY8uFBbYX7";
-        var key = this.getKey(encrypt_id[2], nonce_str, time);
+        var key = this.getKey(encrypt_id[2], nonce_str, time.toString());
 
         var str1 = `${senddata}&token=${$.joyToken}&time=${time}&nonce_str=${nonce_str}&key=${key}&is_trust=1`;
         //console.log(str1);
@@ -586,14 +586,14 @@ let utils = {
             grn: 1,
             ioa: "fffffftt",
             jj: 1,
-            jk: "-a45046de9fbf-0a4fc8ec9548a7f9",
+            jk: "a",
             mj: [1, 0, 0],
             msg: "",
-            nav: "88569",
-            np: "Linux aarch64",
-            nv: "Google Inc.",
+            nav: "167741",
+            np: "iPhone",
+            nv: "Apple Computer, Inc.",
             pdn: [],
-            ro: ["f", "f", "f", "f", "f", "f", "f"],
+            ro: ["iPhone10,2", "10.0.8", "iOS", "14.4.2", "167741", "f", "a"],
             scr: [818, 393],
             ss: TouchSession,
             t: time,

@@ -26,6 +26,7 @@ if ($.isNode()) {
     cookiesArr.push(jdCookieNode[item])
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
+  if (JSON.stringify(process.env).indexOf('GITHUB') > -1) process.exit(0);
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
@@ -195,7 +196,7 @@ async function pickshell(body) {
               break
             case '捡到小海螺了，做成项链一定很漂亮':
               dwName = '小海螺'
-              break
+              break 
             case '把我放在耳边，就能听到大海的声音了~':
               dwName = '大海螺'
               break
@@ -226,8 +227,10 @@ async function pickshell(body) {
 
 // 热气球接客
 async function speedUp() {
+  let strBuildIndexArr = ['food', 'sea', 'shop', 'fun']
+  let strBuildIndex = strBuildIndexArr[Math.floor((Math.random() * strBuildIndexArr.length))]
   return new Promise(async (resolve) => {
-    $.get(taskUrl(`user/SpeedUp`, `strBuildIndex=food`), async (err, resp, data) => {
+    $.get(taskUrl(`user/SpeedUp`, `strBuildIndex=${strBuildIndex}`), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
