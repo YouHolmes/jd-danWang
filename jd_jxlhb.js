@@ -47,16 +47,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       '温馨提示：如提示助力火爆，可尝试寻找京东客服')
   let res = []
   if (res && res.activeId) $.activeId = res.activeId;
-  $.authorMyShareIds = [
-      'RQ_M52yh3gO4liUU25pbC7Xvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
-      'RQ_M52yh3gO4liUU25pbC7YuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
-      'RQ_M52yh3gO4liUU25pbC-VQbRLnjNiIvo1VWb1p88yHJ2KOdD5ZkCoAQAyokddD',
-      'RQ_M52yh3gO4liUU25pbCz8zz_JTVkF7jqIVUaNPBdxhqu5aVIPUU_vmOG9wiYyZ',
-      'RQ_M52yh3gO4liUU25pbCzk1aNbDAyovcd2k1axfdadsYoaS91JkPsRnlPkomy3A',
-      'RQ_M52yh3gO4liUU25pbCy6GW8A6DOQvPdblpA-bP9uU7ylNJ5mxKy0n1jn15Gjv',
-      'RQ_M52yh3gO4liUU25pbCwFlD8pJ4oooqgV-fG_uNUWXoqoGz2N52v3MSySXgCke',
-      'RQ_M52yh3gO4liUU25pbCxKYDZSU2vS9exAJ4Wc524l1Ffe2U484vy5GrKcjlRVW'
-  ];
+  $.authorMyShareIds = [];
   //开启红包,获取互助码
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
@@ -84,13 +75,6 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
     $.canHelp = true;
     $.max = false;
-    for (let item of $.authorMyShareIds) {
-      if (!item) continue;
-      await enrollFriend(item);
-      await $.wait(3000);
-      if ($.max) continue
-      if (!$.canHelp) break
-    }
     for (let code of $.packetIdArr) {
       if (!code) continue;
       if ($.UserName === code['userName']) continue;
@@ -100,6 +84,17 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       if ($.max) continue
       if (!$.canHelp) break
     }
+    /*if ($.canHelp) {
+      console.log(`\n【${$.UserName}】有剩余助力机会，开始助力作者\n`)
+      for (let item of $.authorMyShareIds) {
+        if (!item) continue;
+        console.log(`【${$.UserName}】去助力作者的邀请码：${item}`);
+        await enrollFriend(item);
+        await $.wait(3000);
+        if ($.max) continue
+        if (!$.canHelp) break
+      }
+    }*/
   }
   //拆红包
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -175,7 +170,7 @@ function getUserInfo() {
               $.grades.push(vo.dwGrade)
               $.helpNum = vo.dwHelpTimes
             }
-           if (data.Data.dwHelpedTimes === $.helpNum) {
+            if (data.Data.dwHelpedTimes === $.helpNum) {
               console.log(`${$.grades[$.grades.length - 1]}个阶梯红包已全部拆完\n`)
             } else {
               console.log(`获取助力码成功：${data.Data.strUserPin}\n`);
@@ -301,32 +296,32 @@ function getAuthorShareCode(url) {
 function taskurl(function_path, body = '', stk) {
   let url = `${BASE_URL}/${function_path}?activeId=${$.activeId}&publishFlag=1&channel=7&${body}&sceneval=2&g_login_type=1&timestamp=${Date.now()}&_=${Date.now() + 2}&_ste=1`
   const deviceId = `${
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10)
+      Math.random().toString(36).slice(2, 10) +
+      Math.random().toString(36).slice(2, 10) +
+      Math.random().toString(36).slice(2, 10) +
+      Math.random().toString(36).slice(2, 10) +
+      Math.random().toString(36).slice(2, 10)
   }`
   url += `&phoneid=${deviceId}`
   url += `&stepreward_jstoken=${
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10)
+      Math.random().toString(36).slice(2, 10) +
+      Math.random().toString(36).slice(2, 10) +
+      Math.random().toString(36).slice(2, 10) +
+      Math.random().toString(36).slice(2, 10)
   }`
   if (stk) {
-      url += '&_stk=' + encodeURIComponent(stk)
+    url += '&_stk=' + encodeURIComponent(stk)
   }
   return {
-      'url': url,
-      'headers': {
-          'Host': 'wq.jd.com',
-          'Cookie': cookie,
-          'accept': "*/*",
-          'user-agent': `jdpingou;iPhone;4.8.2;14.5.1;${deviceId};network/wifi;model/iPhone13,4;appBuild/100546;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/318;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`,
-          'accept-language': 'zh-cn',
-          'referer': `https://wqactive.jd.com/cube/front/activePublish/step_reward/${$.activeId}.html?aid=${$.activeId}`
-      }
+    'url': url,
+    'headers': {
+      'Host': 'wq.jd.com',
+      'Cookie': cookie,
+      'accept': "*/*",
+      'user-agent': `jdpingou;iPhone;4.8.2;14.5.1;${deviceId};network/wifi;model/iPhone13,4;appBuild/100546;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/318;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`,
+      'accept-language': 'zh-cn',
+      'referer': `https://wqactive.jd.com/cube/front/activePublish/step_reward/${$.activeId}.html?aid=${$.activeId}`
+    }
   }
 }
 
