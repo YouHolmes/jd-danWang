@@ -64,7 +64,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
         }
         continue
       }
-      UA = `jdapp;iPhone;10.0.8;14.4.2;${randomString(40)};network/wifi;ADID/3F74A88A-71D3-404B-BBDF-8C0575E680EC;model/iPhone10,2;addressid/4091160336;appBuild/167741;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`
+      UA = `jdapp;iPhone;10.0.8;14.4.2;${randomString()};network/wifi;ADID/3F74A88A-71D3-404B-BBDF-8C0575E680EC;model/iPhone10,2;addressid/4091160336;appBuild/167741;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`
       uuid = UA.split(';') && UA.split(';')[4] || ''
       await jd_necklace();
     }
@@ -197,7 +197,7 @@ function formatInt(num, prec = 1, ceil = false) {
 //每日签到福利
 function necklace_sign() {
   return new Promise(async resolve => {
-    const body = await zooFaker.getBody({ 'cookie': cookie, 'action': 'sign', 'joyToken': joyToken });
+    const body = await zooFaker.getBody({ 'cookie': cookie, 'action': 'sign', 'joyToken': joyToken, 'uuid': uuid });
     $.post(taskPostUrl("necklace_sign", body), async (err, resp, data) => {
       try {
         if (err) {
@@ -230,7 +230,7 @@ function necklace_sign() {
 //兑换无门槛红包
 function necklace_exchangeGift(scoreNums) {
   return new Promise(async resolve => {
-    const body = await zooFaker.getBody({ 'cookie': cookie, 'action': 'exchangeGift', 'id': scoreNums, 'joyToken': joyToken });
+    const body = await zooFaker.getBody({ 'cookie': cookie, 'action': 'exchangeGift', 'id': scoreNums, 'joyToken': joyToken, 'uuid': uuid });
     console.log(`\n使用${scoreNums}个点点券兑换${scoreNums / 1000}元无门槛红包`);
     $.post(taskPostUrl("necklace_exchangeGift", body), async (err, resp, data) => {
       try {
@@ -264,7 +264,7 @@ function necklace_exchangeGift(scoreNums) {
 //领取奖励
 function necklace_chargeScores(bubleId) {
   return new Promise(async resolve => {
-    const body = await zooFaker.getBody({ 'cookie': cookie, 'action': 'chargeScores', 'id': bubleId, 'giftConfigId': $.giftConfigId, 'joyToken': joyToken });
+    const body = await zooFaker.getBody({ 'cookie': cookie, 'action': 'chargeScores', 'id': bubleId, 'giftConfigId': $.giftConfigId, 'joyToken': joyToken, 'uuid': uuid });
     $.post(taskPostUrl("necklace_chargeScores", body), async (err, resp, data) => {
       try {
         if (err) {
@@ -300,7 +300,7 @@ function necklace_startTask(taskId, functionId = 'necklace_startTask', itemId = 
       currentDate: $.lastRequestTime.replace(/:/g, "%3A"),
     }
     if (functionId === 'necklace_startTask') {
-      body = await zooFaker.getBody({ 'id': taskId, 'cookie': cookie, 'action': 'startTask', 'joyToken': joyToken })
+      body = await zooFaker.getBody({ 'id': taskId, 'cookie': cookie, 'action': 'startTask', 'joyToken': joyToken, 'uuid': uuid })
     }
     if (itemId && functionId === 'necklace_reportTask') body['itemId'] = itemId;
     $.post(taskPostUrl(functionId, body), async (err, resp, data) => {
@@ -506,12 +506,12 @@ function taskPostUrl(function_id, body = {}) {
     }
   }
 }
-function randomString(e) {
-  e = e || 32;
-  let t = "abcdefhijkmnprstwxyz2345678", a = t.length, n = "";
-  for (i = 0; i < e; i++)
-    n += t.charAt(Math.floor(Math.random() * a));
-  return n
+function randomString() {
+  return Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10)
 }
 function getToken(timeout = 0){
   return new Promise((resolve) => {

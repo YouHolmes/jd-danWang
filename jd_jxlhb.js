@@ -167,16 +167,18 @@ function getUserInfo() {
           // console.log('获取助力码', data)
           data = JSON.parse(data)
           if (data.iRet === 0) {
-            $.grades = [];
+            $.grades = []
+            $.helpNum = ''
             let grades = data.Data.gradeConfig
             for(let key of Object.keys(grades)){
               let vo = grades[key]
               $.grades.push(vo.dwGrade)
+              $.helpNum = vo.dwHelpTimes
             }
-            console.log(`获取助力码成功：${data.Data.strUserPin}\n`);
-            if (data.Data['dwCurrentGrade'] >= $.grades[$.grades.length - 1]) {
+           if (data.Data.dwHelpedTimes === $.helpNum) {
               console.log(`${$.grades[$.grades.length - 1]}个阶梯红包已全部拆完\n`)
             } else {
+              console.log(`获取助力码成功：${data.Data.strUserPin}\n`);
               if (data.Data.strUserPin) {
                 $.packetIdArr.push({
                   strUserPin: data.Data.strUserPin,
