@@ -74,6 +74,12 @@
 1 0,1 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
 #京喜领88元红包
 1 0,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+#京喜签到
+1 0,3 * * * node /scripts/jd_jxqd.js >> /scripts/logs/jd_jxqd.log 2>&1
+#激扬奥运
+0 0,2 * * * node /scripts/jd_olympic.js >> /scripts/logs/jd_olympic.log 2>&1
+#母音甄选
+0 0,3 * * * node /scripts/jd_summer_mom_opencard.js >> /scripts/logs/jd_summer_mom_opencard.log 2>&1
 
 ##############长期活动##############
 # 签到
