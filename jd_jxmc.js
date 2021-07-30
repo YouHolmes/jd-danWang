@@ -14,22 +14,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //惊喜APP的UA。领取助力任务奖励需要惊喜APP的UA,环境变量：JX_USER_AGENT，有能力的可以填上自己的UA
 const JXUserAgent =  $.isNode() ? (process.env.JX_USER_AGENT ? process.env.JX_USER_AGENT : ``):``;
-$.inviteCodeList = [
-    'sA0J0amfPeyFqzbgvE-y2rXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
-    'sA0J0amfPeyFqzbgvE-y2rYuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
-    'sA0J0amfPeyFqzbgvE-y2kSNHATXT18BkM7jh1zOOGnTymePRHvaTQETgWh_Waw2',
-    'sA0J0amfPeyFqzbgvE-y2pyeOjBWGMkn3gpx-BKaaPA_J9xStzTjB9yffTgLwSnU',
-    'sA0J0amfPeyFqzbgvE-y2sP3AC6fonLo29SgRHl5C80Q1OTeMGtW2bMVYbLv98go',
-    'sA0J0amfPeyFqzbgvE-y2gFlD8pJ4oooqgV-fG_uNUWXoqoGz2N52v3MSySXgCke',
-    'sA0J0amfPeyFqzbgvE-y2mBGHc3UrSHsxD_nLl_miVI',
-    'sA0J0amfPeyFqzbgvE-y2hKYDZSU2vS9exAJ4Wc524l1Ffe2U484vy5GrKcjlRVW',
-    'sA0J0amfPeyFqzbgvE-y2lyLXlL86WiHBTJvW0Ngeoc',
-    'sA0J0amfPeyFqzbgvE-y2nsZ68Fif_8Nb_PzfTkxqhWFxi6BGQHznYYNi269OW61',
-    'sA0J0amfPeyFqzbgvE-y2gJsjJekq_ER_DVLDaQQSqM',
-    'sA0J0amfPeyFqzbgvE-y2sNlTgxW2gq6B981Lzm4p80',
-    'sA0J0amfPeyFqzbgvE-y2u3tRlQxV4RS1rxXmddzy1FtfG2UnaZjSNm0gR2CSLuQ',
-    'sA0J0amfPeyFqzbgvE-y2nzX7yCmFyXgCq-hKuCUt-cc-bmgUMDCqkfCPfba7C04'
-];
+$.inviteCodeList = [];
 let cookiesArr = [];
 $.appId = 10028;
 $.helpCkList = [];
@@ -74,35 +59,14 @@ if ($.isNode()) {
     await $.wait(2000);
   }
   console.log('\n##################开始账号内互助#################\n');
-  let newCookiesArr = [];
   for(let i = 0;i<$.helpCkList.length;i++){
-    newCookiesArr.push($.helpCkList.slice(i,i++))
-  }
-  for (let i = 0; i < newCookiesArr.length; i++) {
-    let thisCookiesArr = newCookiesArr[i];
-    let codeList = [];
-    /*for (let j = 0; j < thisCookiesArr.length; j++) {
-      $.cookie = thisCookiesArr[j];
-      $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
-      for (let k = 0; k < $.inviteCodeList.length; k++) {
-        if ($.UserName === $.inviteCodeList[k].use) {
-          codeList.push({
-            'name': $.UserName,
-            'code': $.inviteCodeList[k].code
-          });
-        }
-      }
-    }*/
-    console.log('账号' + (i + 1) + '开始助力：');
-    for (let j = 0; j < thisCookiesArr.length; j++) {
-      $.cookie = thisCookiesArr[j];
-      $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
-      for (let k = 0; k < $.inviteCodeList.length; k++) {
-        $.oneCodeInfo = $.inviteCodeList[k];
-        console.log('被助力码：' + $.oneCodeInfo);
-        await takeGetRequest('help');
-        await $.wait(2000);
-      }
+    $.cookie = $.helpCkList[i];
+    console.log('账号' + (i + 1) + ' 开始助力：');
+    for (let k = 0; k < $.inviteCodeList.length; k++) {
+      $.oneCodeInfo = $.inviteCodeList[k];
+      console.log('被助力码：' + $.oneCodeInfo);
+      await takeGetRequest('help');
+      await $.wait(2000);
     }
   }
 })()
