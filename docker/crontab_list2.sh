@@ -21,7 +21,7 @@
 # 翻翻乐(7.15-8.15)
 20 * * * * node /scripts/jd_flipcards.js >> /scripts/logs/jd_flipcards.log 2>&1
 # 摇钱树助力
-0 */4 * * * * node /scripts/jd_moneyTree_help.js >> /scripts/logs/jd_moneyTree_help.log 2>&1
+0 */4 * * * node /scripts/jd_moneyTree_help.js >> /scripts/logs/jd_moneyTree_help.log 2>&1
 
 ##############长期活动##############
 # 签到
