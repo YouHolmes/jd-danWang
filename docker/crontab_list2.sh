@@ -21,7 +21,7 @@
 # 翻翻乐(7.15-8.15)
 20 * * * * node /scripts/jd_flipcards.js >> /scripts/logs/jd_flipcards.log 2>&1
 # 摇钱树助力
-0-59/30 * * * * node /scripts/jd_moneyTree_help.js >> /scripts/logs/jd_moneyTree_help.log 2>&1
+0 */4 * * * * node /scripts/jd_moneyTree_help.js >> /scripts/logs/jd_moneyTree_help.log 2>&1
 
 ##############长期活动##############
 # 签到
@@ -29,7 +29,7 @@
 # 东东农场
 5 6-23/4 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
 # 摇钱树
-0 */3 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
+0 */4 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
 # 东东萌宠
 5 6-23/4 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
 # 京东种豆得豆

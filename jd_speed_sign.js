@@ -89,8 +89,8 @@ async function jdGlobal() {
 
     await signInit()
     await sign()
-    await invite()
-    await invite2()
+    //await invite()
+    //await invite2()
     $.score = 0
     $.total = 0
     await taskList()

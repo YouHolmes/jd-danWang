@@ -67,7 +67,7 @@
 # 跳跳乐瓜分京豆
 1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 摇钱树助力
-0-59/30 * * * * node /scripts/jd_moneyTree_help.js >> /scripts/logs/jd_moneyTree_help.log 2>&1
+0 */3 * * * * node /scripts/jd_moneyTree_help.js >> /scripts/logs/jd_moneyTree_help.log 2>&1
 # 首页领京豆
 21 9 * * * node /scripts/jd_MMdou.js >> /scripts/logs/jd_MMdou.log 2>&1
 #全民抢京豆
@@ -85,7 +85,7 @@
 # 东东农场
 5 6-23/4 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
 # 摇钱树
-0 */3 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
+0 */4 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
 # 东东萌宠
 5 6-23/4 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
 # 京东种豆得豆
