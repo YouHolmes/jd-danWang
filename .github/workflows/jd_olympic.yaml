@@ -6,7 +6,7 @@ name: jd_olympic-激扬奥运
 on:
     workflow_dispatch:
     schedule:
-        - cron: "58 15,23,1 * * *"
+        - cron: "1 15,16,23,1 * * *"
     watch:
         types: [started]
     repository_dispatch:
