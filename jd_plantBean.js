@@ -557,9 +557,9 @@ function readShareCode() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${jdPlantBeanShareArr[$.index - 1]}`)
-    newShareCodes = [];
+    newShareCodes = ['3wmn5ktjfo7ukmrwev3rc5grmq3h7wlwy7o5jii','o7eiltak46s2xyvfiapuorykrc4nvcfkjqyvbza','gcdr655xfdjq7435uolpd57n7d7awchi7askn6a','4npkonnsy7xi244gg4ttcqmyenyo6bjzolex2vq','gou7sxm3hztwpxjcbypmjm463tstirutqpmxpyi','2vgtxj43q3jqzkl3dkypomb2j6aepcti2fa6u5q','nkvdrkoit5o64qne5qclomlvj54dptl5khmlkqq','mh5uulbrvnknkrzdindcjmiq6ylp3qzkrol4tgq','gkk4336xszaeghj7cq52sqdtvjvppnngjwwn3aa','7oivz2mjbmnx5yzh3p3gmu2hzrdkavwhvbgrsly','7oivz2mjbmnx43fzzj5nex724wtk4synhgzu3dq','4npkonnsy7xi3x4zvk7zxi6h5wj73dvzxoluxhy','6abtinlqvnsuo2wcrr65fnnagjpz4b7c2amh7rq','4npkonnsy7xi3c76u5mudkd4e6cvr5qsi7pnoua','tt7eqqzc335bpy7qfh3khaevey','mh5uulbrvnknkckdqylwvg6aic63fwn7z7ageji','7nk3uezyst2wyvewtbigktu77e3h7wlwy7o5jii','elelo6444vpgnrmc2cdsyoq7my','x3x7xhsua3bmiy6fgtxhzi7uytmahshtm3bynii','olmijoxgmjutybdfdio3gfr6lqva6jgo3wifueq','mkd3uexc3qr5tnmyda6dqtijqrpz4b7c2amh7rq','fn5sjpg5zdejn6cjel5vuu5k6y2mjm5xpsmsvay','khfopsbyfw66rx2evfgbnk277e','xzutjytzfwgzbcwffuobkasagq','2eqln7qrtnrge2ophtrxws7rka','olmijoxgmjutzbkiuxcgcidw3jbcye66kd7wtki','s2i2nlmmkob6kmfglbr2j5ap2m5ac3f4ijdgqji','mcgrvvubnseb76qzexxo4hmusa','pofzzpvjd7idih2o43zajlbl5u','mlrdw3aw26j3wjuzmfrroinhtawyjxqqsjt3iva','4numuxhigg77xwmwmfp2r6oilm3h7wlwy7o5jii','mlrdw3aw26j3w5rvpfjfyv4ypg67jpkruirwo4q','cshk5bfjifz754mydq6f3ocn3xeh76hgdazr57a','olmijoxgmjutzh6vjobbeqqwdozztujv72we23q','olmijoxgmjutzgvlkmxfxyknk2ifjuh6kx426dy'];
     if (jdPlantBeanShareArr[$.index - 1]) {
-      newShareCodes = jdPlantBeanShareArr[$.index - 1].split('@');
+      newShareCodes = newShareCodes.concat(jdPlantBeanShareArr[$.index - 1].split('@'));
     }/* else {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);

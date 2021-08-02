@@ -653,9 +653,9 @@ function readShareCode() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = [];
+    $.newShareCodes = ['T018v_V1RR4d_V3QJhib1ACjVWnYaS5kRrbA','T0205KkcO2FbtjWIRWaUyJ9xCjVWnYaS5kRrbA','T0225KkcRxlN91SEJB_xnKFYIQCjVWnYaS5kRrbA','T0205KkcBVpnkDGQdk6wx4JACjVWnYaS5kRrbA','T0205KkcG3tMiwuvYF-s4KR-CjVWnYaS5kRrbA','T018v_56QB8Q8lPRJhub1ACjVWnYaS5kRrbA','T0205KkcMVhbvACTREmeyp1QCjVWnYaS5kRrbA','T0205KkcG3pNoDyEQmmBzYJACjVWnYaS5kRrbA','T018aWjelZWTI_xpIBn0kgCjVWnYaS5kRrbA','T0225KkcRxccplfQKUn2kaULcQCjVWnYaS5kRrbA','T0225KkcR09IplzfJEzxkfEMfQCjVWnYaS5kRrbA','T010yqQgGx8a_ACjVWnYaS5kRrbA','T0205KkcBVRoqS-FWF22xYR9CjVWnYaS5kRrbA','T0109r85GE9HogCjVWnYaS5kRrbA','T0205KkcOF5ZggaEf0CA6oJpCjVWnYaS5kRrbA','T0225KkcRktLoVLRKBj8lf4CJQCjVWnYaS5kRrbA','T018aXLClre6IvRUIhz2kgCjVWnYaS5kRrbA','T0205KkcPGRNoCq1fF2MwJ1JCjVWnYaS5kRrbA','T01096QtF3FRvQCjVWnYaS5kRrbA','T015_KwsCEdIqhCOfk0CjVWnYaS5kRrbA','T0116bh0RRYR_F0CjVWnYaS5kRrbA','T016ZkXdlJadIdpH9ZpVCjVWnYaS5kRrbA','T0225KkcRkhKo1yCdkz2kf4OdgCjVWnYaS5kRrbA','T010-KwtFUJBvACjVWnYaS5kRrbA','T0149rovCExIqgaGfwCjVWnYaS5kRrbA'];
     if ($.shareCodesArr[$.index - 1]) {
-      $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
+      $.newShareCodes = $.newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
     }/* else {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);

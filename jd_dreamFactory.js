@@ -16,9 +16,7 @@ let tuanActiveId = ``, hasSend = false;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
 $.Qswitch =true; $.SQswitch=true;
-const inviteCodes = [
-  'nH1XR4jq2uzbYoB-1k_2wA==@Sz2oS9zo11SEvR593Bex6g==@N65gxIAwuVA3p-Du05UXUg==@Gy9KrAI8iGF03ENq55vY3w==@SM8a-mS15WpNaFcNpTX0Zg==@CntxZMVPRPrnRwDGEdKCng==@pH6VKO0hEAGgJJF1oyMhVQ==@jvPgYjr4eezesZhIicoQRg==@nI0EvC7t1MQV_YTaQKS4cA==@77U7hJcIxAsrYWfQPd3qAg==@OpdZTI0kWvpwhhmKak9nTQ==@kYG2iukfwBw2HkULET49tg==@npVP727-ATXQMoSbYwvfeg==@H-tO6oRBU8ge6ZKvLu_9Pw==@jldY4DzQ4BTcnLVlbOYbhA==@kRHuXQBCCRZ7B2EqX6RjuA==@y_pZE2xvUtJhxi78tmKZsg=='
-];
+const inviteCodes = [];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';$.SQSwitch = true;$.SJSwitch = true;
 $.tuanIds = [];
 $.appId = 10001;
@@ -1291,14 +1289,14 @@ function readShareCode() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = [];
+    $.newShareCodes = ['CntxZMVPRPrnRwDGEdKCng','nI0EvC7t1MQV_YTaQKS4cA==','jldY4DzQ4BTcnLVlbOYbhA==','Gy9KrAI8iGF03ENq55vY3w==','77U7hJcIxAsrYWfQPd3qAg==','npVP727-ATXQMoSbYwvfeg==','H-tO6oRBU8ge6ZKvLu_9Pw==','EaWE-_l2oW8vOmUB5qJ5Zg==','OpdZTI0kWvpwhhmKak9nTQ==','kYG2iukfwBw2HkULET49tg==','kRHuXQBCCRZ7B2EqX6RjuA==','y_pZE2xvUtJhxi78tmKZsg==','yrD7XOeiJi51-VNXVy3Ztw==','i4i9s_EF87Ypo-BMDbBJhA==','uyEXVo5BycEScPNEGulqgQ=='];
     if ($.shareCodesArr[$.index - 1]) {
-      $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-    } else {
+      $.newShareCodes = $.newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
+    } /*else {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
-    }
+    }*/
     /*const readShareCodeRes = await readShareCode();
     if (readShareCodeRes && readShareCodeRes.code === 200) {
       $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];

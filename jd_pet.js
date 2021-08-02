@@ -473,9 +473,9 @@ function readShareCode() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    newShareCodes = [];
+    newShareCodes = ['MTE1NDAxNzgwMDAwMDAwMzg3ODcyMzk=','MTE1NDUyMjEwMDAwMDAwMzg4MzI2NTk=','MTE1NDAxNzYwMDAwMDAwMzg4MDk5OTM=','MTEzMzI0OTE0NTAwMDAwMDA0MjE0MTI2OQ==','MTEzMzI0OTE0NTAwMDAwMDA0Mzg2ODMwMQ==','MTE1NDUyMjEwMDAwMDAwNDM4Njg1Njc=','MTE1NDAxNzcwMDAwMDAwMzkwNDUzNDk=','MTEzMzI0OTE0NTAwMDAwMDAzOTA2MDI3Nw==','MTAxODEyMjkyMDAwMDAwMDQwNjk2OTk5','MTEzMzI0OTE0NTAwMDAwMDAzOTA3NzgwNQ==','MTE1NDUyMjEwMDAwMDAwMzkwNzg4MjE=','MTE1NDUwMTI0MDAwMDAwMDQ0OTE2Mjgz','MTE1NDUyMjEwMDAwMDAwMzkwMDg4MDU=','MTAxODEyMjkyMDAwMDAwMDM5NzQyMDgx','MTE1NDQ5OTUwMDAwMDAwNDIxNjQ3MjU=','MTE1NDQ5OTUwMDAwMDAwNDI2NzUyNDM=','MTEzMzI0OTE0NTAwMDAwMDA0MzQ3Nzk5MQ==','MTEyNTEyNTE1MDAwMDAwMDA0NzI1MDg2NQ==','MTE1NDUyMjEwMDAwMDAwMzkwNTI5NDk=','MTE1NDAxNzgwMDAwMDAwNDM0NjQzNTk=','MTE1NDUwMTI0MDAwMDAwMDM5ODAxNTM3','MTE1NDQ5OTUwMDAwMDAwNDQ5MTYyMzk=','MTAxODc2NTEzMjAwMDAwMDAyNjgzNDg5OQ==','MTE0MDkyMjEwMDAwMDAwNDczMjYxMTM=','MTAxNzIyNTU1NDAwMDAwMDA0ODc3ODA3NQ==','MTAxNzIyNTU1NDAwMDAwMDA0ODg5NDQxNQ==','MTAxODc2NTEzMjAwMDAwMDAwMDQwMTMwMQ==','MTE1NDQ5OTUwMDAwMDAwNDMwMDcxNjM=','MTEzMzI1MTE4NDAwMDAwMDA1MDA5NDE1NQ==','MTEzMzI1MTE4NDAwMDAwMDA1MDMwMzI3NQ==','MTE1MzEzNjI2MDAwMDAwMDUyMTQyMDc5','MTAxNzIxMDc1MTAwMDAwMDA1MjUxOTU3NQ==','MTE1NDQ5MzYwMDAwMDAwNDI5MTIwODE='];
     if ($.shareCodesArr[$.index - 1]) {
-      newShareCodes = $.shareCodesArr[$.index - 1].split('@');
+      newShareCodes = newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
     }/* else {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
