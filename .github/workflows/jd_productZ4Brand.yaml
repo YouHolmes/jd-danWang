@@ -27,7 +27,7 @@ jobs:
                   npm install
             - name: "运行 【激扬奥运】"
               run: |
-                  node jd_productZ4Brand.yaml.js
+                  node jd_productZ4Brand.js
               env:
                   JD_COOKIE: ${{ github.event.client_payload.JD_COOKIE || secrets.JD_COOKIE }}
                   JD_DEBUG: ${{ github.event.client_payload.JD_DEBUG || secrets.JD_DEBUG }}

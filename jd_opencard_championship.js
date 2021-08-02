@@ -46,7 +46,7 @@ if (!process.env.JD_OPENCARE_CHAMPIONSHIP) {
   $.log(`请设置env变量 JD_OPENCARE_CHAMPIONSHIP    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
   $.log(`请设置env变量 JD_OPENCARE_CHAMPIONSHIP    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
   $.log(`请设置env变量 JD_OPENCARE_CHAMPIONSHIP    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
-  Jd_opencard_championship = 21
+  Jd_opencard_championship = 31
 }else {
   Jd_opencard_championship = Number(process.env.JD_OPENCARE_CHAMPIONSHIP)
   $.log(`你设置了JD_SUMMER_MOM_OPENCARD变量 运行到 ${Jd_opencard_championship} ck停止`)
