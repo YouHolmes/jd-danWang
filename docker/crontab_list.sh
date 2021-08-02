@@ -34,16 +34,8 @@
 20 0-23/3 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 #东东电竞经理
 47 10 * * * node /scripts/jd_djjl.js >> /scripts/logs/jd_djjl.log 2>&1
-#食力街跑酷达人
-0 0 * * * node /scripts/jd_msj.js >> /scripts/logs/jd_msj.log 2>&1
 #天天优惠大乐透
 25 6 * * * node /scripts/jd_DrawEntrance.js >> /scripts/logs/jd_DrawEntrance.log 2>&1
-#国创
-25 8 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
-#pk
-33 1,10,14,18 * * * node /scripts/jd_ddopk.js >> /scripts/logs/jd_ddopk.log 2>&1
-#QQ星
-1 0,7,18 * * * node /scripts/jd_qqxing.js >> /scripts/logs/jd_qqxing.log 2>&1
 #众筹许愿池
 20 12 * * * node /scripts/jd_wishingPool.js >> /scripts/logs/jd_wishingPool.log 2>&1
 #汪汪乐园
@@ -63,7 +55,7 @@
 # 翻翻乐(7.15-8.15)
 20 * * * * node /scripts/jd_flipcards.js >> /scripts/logs/jd_flipcards.log 2>&1
 # 京喜财富岛提现
-0 0,12 * * * node /scripts/jd_cfdtx.js >> /scripts/logs/jd_cfdtx.log 2>&1
+0 0,12 * * * node /scripts/jx_cfdtx.js >> /scripts/logs/jx_cfdtx.log 2>&1
 # 跳跳乐瓜分京豆
 1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 摇钱树助力
@@ -80,6 +72,14 @@
 0 0,2 * * * node /scripts/jd_olympic.js >> /scripts/logs/jd_olympic.log 2>&1
 #母音甄选
 0 0,3 * * * node /scripts/jd_summer_mom_opencard.js >> /scripts/logs/jd_summer_mom_opencard.log 2>&1
+#京喜首页签到
+20 1,8 * * * node /scripts/jd_jxqd.js >> /scripts/logs/jd_jxqd.log 2>&1
+#jd_olympic_opencard1
+5 0,18,22 * * * node /scripts/jd_opencard_championship.js >> /scripts/logs/jd_opencard_championship.log 2>&1
+#jd_olympic_opencard2
+20 0,18,22 * * * node /scripts/jd_opencard_olympic_run.js >> /scripts/logs/jd_opencard_olympic_run.log 2>&1
+#jd_olympic_opencard2
+20 0,18,22 * * * node /scripts/jd_productZ4Brand.js >> /scripts/logs/jd_productZ4Brand.log 2>&1
 
 ##############长期活动##############
 # 签到
