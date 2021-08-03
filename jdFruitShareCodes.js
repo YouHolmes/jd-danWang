@@ -6,9 +6,7 @@
 //云服务器腾讯云函数等NOde.js用户在此处填写京东东农场的好友码。
 // 同一个京东账号的好友互助码用@符号隔开,不同京东账号之间用&符号或者换行隔开,下面给一个示例
 // 如: 京东账号1的shareCode1@京东账号1的shareCode2&京东账号2的shareCode1@京东账号2的shareCode2
-let FruitShareCodes = [
-
-]
+let FruitShareCodes = []
 // 判断github action里面是否有水果互助码
 if (process.env.FRUITSHARECODES) {
   if (process.env.FRUITSHARECODES.indexOf('&') > -1) {

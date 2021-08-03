@@ -6,7 +6,7 @@ name: jd_pet-东东萌宠
 on:
     workflow_dispatch:
     schedule:
-        - cron: "40 4,10,23 * * *"
+        - cron: "58 4,15,23 * * *"
     watch:
         types: [started]
     repository_dispatch:

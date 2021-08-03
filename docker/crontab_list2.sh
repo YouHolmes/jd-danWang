@@ -60,3 +60,13 @@
 #0 0,8,12,16 * * * node /scripts/jd_joy_reward.js >> /scripts/logs/jd_joy_reward.log 2>&1
 # 签到领现金
 27 7,15,23 * * * node /scripts/jd_cash.js >> /scripts/logs/jd_cash.log 2>&1
+# jd_cash_exchange
+0,2 0 * * * node /scripts/jd_cash_exchange.js >> /scripts/logs/jd_cash_exchange.log 2>&1
+# 点点券
+20 0,7,20 * * * node /scripts/jd_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
+# 闪购盲盒
+27 8,10 * * * node /scripts/jd_sgmh.js >> /scripts/logs/jd_sgmh.log 2>&1
+# 金融养猪
+12 * * * * node /scripts/jd_pigPet.js >> /scripts/logs/jd_pigPet.log 2>&1
+# 东东超市
+11 */4 * * * node /scripts/jd_superMarket.js >> /scripts/logs/jd_superMarket.log 2>&1
