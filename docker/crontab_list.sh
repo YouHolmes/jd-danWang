@@ -55,7 +55,7 @@
 # 翻翻乐(7.15-8.15)
 20 * * * * node /scripts/jd_flipcards.js >> /scripts/logs/jd_flipcards.log 2>&1
 # 京喜财富岛提现
-0 0,12 * * * node /scripts/jx_cfdtx.js >> /scripts/logs/jx_cfdtx.log 2>&1
+0 0,12 * * * node /scripts/jd_cfdtx.js >> /scripts/logs/jd_cfdtx.log 2>&1
 # 跳跳乐瓜分京豆
 1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 摇钱树助力
@@ -71,13 +71,15 @@
 #母音甄选
 0 0,3 * * * node /scripts/jd_summer_mom_opencard.js >> /scripts/logs/jd_summer_mom_opencard.log 2>&1
 #京喜首页签到
-20 1,8 * * * node /scripts/jd_jxqd.js >> /scripts/logs/jd_jxqd.log 2>&1
+20 1,8 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
 #jd_olympic_opencard1
 5 0,18,22 * * * node /scripts/jd_opencard_championship.js >> /scripts/logs/jd_opencard_championship.log 2>&1
 #jd_olympic_opencard2
 20 0,18,22 * * * node /scripts/jd_opencard_olympic_run.js >> /scripts/logs/jd_opencard_olympic_run.log 2>&1
 #jd_olympic_opencard2
 20 0,18,22 * * * node /scripts/jd_productZ4Brand.js >> /scripts/logs/jd_productZ4Brand.log 2>&1
+#jd_olympic_opencard2
+20 0,18,22 * * * node /scripts/jd_opencard_eat_open_opencard.js >> /scripts/logs/jd_opencard_eat_open_opencard.log 2>&1
 
 ##############长期活动##############
 # 签到

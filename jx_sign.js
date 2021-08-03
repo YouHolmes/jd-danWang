@@ -36,7 +36,17 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-$.shareCodes = [];
+$.shareCodes = [
+  {'smp':'3a74100b05d59e79ef0062bc89464bb4'},
+  {'smp':'0d599ec1b6e9d1d12640a126bd6d8eff'},
+  {'smp':'eb4693969e6fee34176e7d6eb103633d'},
+  {'smp':'5569d44ba17d89ec2bc892c3c6ea7668'},
+  {'smp':'fb9119e9296f528f6d4254bb3a131255'},
+  {'smp':'749160e5ecf024b6c1800c1a534df9b3'},
+  {'smp':'1e31a87a62a01c81f07c05fc5ede8904'},
+  {'smp':'23b251b1b56feec8349f95ae01234099'},
+  {'smp':'cae8b6fb23ac2e814ac505cef7015fe0'}
+];
 $.blackInfo = {}
 $.appId = 10028;
 if ($.isNode()) {
@@ -325,9 +335,9 @@ function taskUrl(functionId, body = '', stk) {
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
-      url: "https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2",
+      url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
       headers: {
-        Host: "wq.jd.com",
+        Host: "me-api.jd.com",
         Accept: "*/*",
         Connection: "keep-alive",
         Cookie: cookie,
@@ -344,11 +354,11 @@ function TotalBean() {
         } else {
           if (data) {
             data = JSON.parse(data);
-            if (data['retcode'] === 1001) {
+            if (Number(data['retcode'])=== 1001) {
               $.isLogin = false; //cookie过期
               return;
             }
-            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
+            if (Number(data['retcode']) === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
               $.nickName = data.data.userInfo.baseInfo.nickname;
             }
           } else {
