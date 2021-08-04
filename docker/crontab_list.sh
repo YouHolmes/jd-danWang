@@ -76,6 +76,10 @@
 30 0,18,22 * * * node /scripts/jd_productZ4Brand.js >> /scripts/logs/jd_productZ4Brand.log 2>&1
 #jd_olympic_opencard2
 50 0,18,22 * * * node /scripts/jd_opencard_eat_open_opencard.js >> /scripts/logs/jd_opencard_eat_open_opencard.log 2>&1
+#jd_olympic_opencard2
+20 0,18,22 * * * node /scripts/jd_opencard_cool_summer.js >> /scripts/logs/jd_opencard_cool_summer.log 2>&1
+#jd_olympic_opencard2
+40 0,18,22 * * * node /scripts/jd_opencard_Daddy.js >> /scripts/logs/jd_opencard_Daddy.log 2>&1
 
 ##############长期活动##############
 # 签到
