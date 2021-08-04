@@ -237,7 +237,7 @@ async function userCashOutState(type = true) {
                 if (buildLvlUpRes.iRet === 0) {
                   await userCashOutState()
                 } else {
-                  console.log(`今日还未赚够${userCashOutStateRes.ddwTodayTargetUnLockRich}财富，无法提现`)
+                  console.log(`今日还未赚够${data.ddwTodayTargetUnLockRich}财富，无法提现`)
                 }
               }
             } else {
