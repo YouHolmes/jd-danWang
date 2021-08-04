@@ -6,7 +6,7 @@ name: jd_plantBean-种豆得豆
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 4,10,16,22 * * *"
+        - cron: "25 4,5,9,22 * * *"
     watch:
         types: [started]
     repository_dispatch:

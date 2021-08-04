@@ -23,6 +23,7 @@ const $ = new Env('京喜领88元红包');
 const notify = $.isNode() ? require('./sendNotify') : {};
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : {};
 let cookiesArr = [], cookie = '';
+let UA, UAInfo = {}
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -34,8 +35,6 @@ if ($.isNode()) {
 $.packetIdArr = [];
 $.activeId = '489177';
 const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
-
-
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -69,7 +68,9 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       }
       continue
     }
+    UA = `jdpingou;iPhone;4.13.0;14.4.2;${randomString()};network/wifi;model/iPhone10,2;appBuild/100609;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/1;hasOCPay/0;supportBestPay/0;session/${Math.random * 98 + 1};pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`
     await main();
+    UAInfo[$.UserName] = UA
   }
   //互助
   console.log(`\n\n自己京东账号助力码：\n${JSON.stringify($.packetIdArr)}\n\n`);
@@ -91,7 +92,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       if ($.UserName === code['userName']) continue;
       console.log(`【${$.UserName}】去助力【${code['userName']}】邀请码：${code['strUserPin']}`);
       await enrollFriend(code['strUserPin']);
-      await $.wait(3000);
+      await $.wait(2000);
       if ($.max) continue
       if (!$.canHelp) break
     }
@@ -101,6 +102,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     cookie = cookiesArr[i];
     $.canOpenGrade = true;
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+    UA = UAInfo[$.UserName]
     for (let grade of $.grades) {
       if (!$.packetIdArr[i]) continue;
       console.log(`\n【${$.UserName}】去拆第${grade}个红包`);
@@ -119,7 +121,6 @@ async function main() {
   await joinActive();
   await $.wait(2000)
   await getUserInfo()
-  await $.wait(2000)
 }
 //参与活动
 function joinActive() {
@@ -295,13 +296,7 @@ function getAuthorShareCode(url) {
 
 function taskurl(function_path, body = '', stk) {
   let url = `${BASE_URL}/${function_path}?activeId=${$.activeId}&publishFlag=1&channel=7&${body}&sceneval=2&g_login_type=1&timestamp=${Date.now()}&_=${Date.now() + 2}&_ste=1`
-  const deviceId = `${
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10) +
-    Math.random().toString(36).slice(2, 10)
-  }`
+  const deviceId = UA.split(';') && UA.split(';')[4] || ''
   url += `&phoneid=${deviceId}`
   url += `&stepreward_jstoken=${
     Math.random().toString(36).slice(2, 10) +
@@ -310,21 +305,27 @@ function taskurl(function_path, body = '', stk) {
     Math.random().toString(36).slice(2, 10)
   }`
   if (stk) {
-      url += '&_stk=' + encodeURIComponent(stk)
+    url += '&_stk=' + encodeURIComponent(stk)
   }
   return {
-      'url': url,
-      'headers': {
-          'Host': 'wq.jd.com',
-          'Cookie': cookie,
-          'accept': "*/*",
-          'user-agent': `jdpingou;iPhone;4.8.2;14.5.1;${deviceId};network/wifi;model/iPhone13,4;appBuild/100546;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/318;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`,
-          'accept-language': 'zh-cn',
-          'referer': `https://wqactive.jd.com/cube/front/activePublish/step_reward/${$.activeId}.html?aid=${$.activeId}`
-      }
+    'url': url,
+    'headers': {
+    'Host': 'wq.jd.com',
+    'Cookie': cookie,
+    'accept': "*/*",
+    'user-agent': UA,
+    'accept-language': 'zh-cn',
+    'referer': `https://wqactive.jd.com/cube/front/activePublish/step_reward/${$.activeId}.html?aid=${$.activeId}`
+    }
   }
 }
-
+function randomString() {
+  return Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10) +
+    Math.random().toString(16).slice(2, 10)
+}
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {

@@ -59,7 +59,7 @@
 # 首页领京豆
 21 9 * * * node /scripts/jd_MMdou.js >> /scripts/logs/jd_MMdou.log 2>&1
 #全民抢京豆
-1 0,1 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
+#1 0,1 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
 #京喜领88元红包
 1 0,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #激扬奥运
@@ -71,11 +71,11 @@
 #jd_olympic_opencard1
 5 0,18,22 * * * node /scripts/jd_opencard_championship.js >> /scripts/logs/jd_opencard_championship.log 2>&1
 #jd_olympic_opencard2
-20 0,18,22 * * * node /scripts/jd_opencard_olympic_run.js >> /scripts/logs/jd_opencard_olympic_run.log 2>&1
+10 0,18,22 * * * node /scripts/jd_opencard_olympic_run.js >> /scripts/logs/jd_opencard_olympic_run.log 2>&1
 #jd_olympic_opencard2
-20 0,18,22 * * * node /scripts/jd_productZ4Brand.js >> /scripts/logs/jd_productZ4Brand.log 2>&1
+30 0,18,22 * * * node /scripts/jd_productZ4Brand.js >> /scripts/logs/jd_productZ4Brand.log 2>&1
 #jd_olympic_opencard2
-20 0,18,22 * * * node /scripts/jd_opencard_eat_open_opencard.js >> /scripts/logs/jd_opencard_eat_open_opencard.log 2>&1
+50 0,18,22 * * * node /scripts/jd_opencard_eat_open_opencard.js >> /scripts/logs/jd_opencard_eat_open_opencard.log 2>&1
 
 ##############长期活动##############
 # 签到
@@ -85,15 +85,15 @@
 # 摇京豆
 0 0 * * * node /scripts/jd_club_lottery.js >> /scripts/logs/jd_club_lottery.log 2>&1
 # 东东农场
-5 6-23/4 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
+5 3-23/4 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
 # 摇钱树
 0 */4 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
 # 东东萌宠
-15 6-23/4 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
+15 3-23/4 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
 # 京东种豆得豆
-0  */6 * * * node /scripts/jd_plantBean.js >> /scripts/logs/jd_plantBean.log 2>&1
+0  */5 * * * node /scripts/jd_plantBean.js >> /scripts/logs/jd_plantBean.log 2>&1
 # 京东全民开红包
-0 0,5 * * * node /scripts/jd_redPacket.js >> /scripts/logs/jd_redPacket.log 2>&1
+0 0,5,10 * * * node /scripts/jd_redPacket.js >> /scripts/logs/jd_redPacket.log 2>&1
 # 进店领豆
 10 0 * * * node /scripts/jd_shop.js >> /scripts/logs/jd_shop.log 2>&1
 # 京东天天加速
@@ -141,7 +141,7 @@
 # jd_cash_exchange
 0,2 0 * * * node /scripts/jd_cash_exchange.js >> /scripts/logs/jd_cash_exchange.log 2>&1
 # 闪购盲盒
-27 8,10 * * * node /scripts/jd_sgmh.js >> /scripts/logs/jd_sgmh.log 2>&1
+27 8,10,12 * * * node /scripts/jd_sgmh.js >> /scripts/logs/jd_sgmh.log 2>&1
 # 京东秒秒币
 10 7,12 * * * node /scripts/jd_ms.js >> /scripts/logs/jd_ms.log 2>&1
 # 京喜财富岛

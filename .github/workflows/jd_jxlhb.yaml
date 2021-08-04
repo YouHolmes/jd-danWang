@@ -6,7 +6,7 @@ name: jd_jxlhb-京喜领红包
 on:
     workflow_dispatch:
     schedule:
-        - cron: "03 */4 * * *"
+        - cron: "3 1,3,5 * * *"
     watch:
         types: [started]
     repository_dispatch:

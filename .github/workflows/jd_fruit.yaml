@@ -6,12 +6,12 @@ name: jd_fruit-东东农场
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 3,9,16,22 * * *"
+        - cron: "0 1,5,9,22 * * *"
     watch:
         types: [started]
     repository_dispatch:
         types: jd_fruit
-        
+
 jobs:
     build:
         runs-on: ubuntu-latest

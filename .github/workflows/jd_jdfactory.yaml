@@ -3,7 +3,7 @@ name: jd_jdfactory-东东工厂
 on:
     workflow_dispatch:
     schedule:
-        - cron: "10 23,4,10 * * *"
+        - cron: "10 1,5,9,22 * * *"
     watch:
         types: [started]
     repository_dispatch:

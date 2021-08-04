@@ -6,7 +6,7 @@ name: jx_sign-京喜签到
 on:
     workflow_dispatch:
     schedule:
-        - cron: "10 17 * * *"
+        - cron: "10 7,12 * * *"
     watch:
         types: [started]
     repository_dispatch:
