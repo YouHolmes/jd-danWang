@@ -80,6 +80,8 @@
 20 0,18,22 * * * node /scripts/jd_opencard_cool_summer.js >> /scripts/logs/jd_opencard_cool_summer.log 2>&1
 #jd_olympic_opencard2
 40 0,18,22 * * * node /scripts/jd_opencard_Daddy.js >> /scripts/logs/jd_opencard_Daddy.log 2>&1
+#特物
+30 11,17 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 
 ##############长期活动##############
 # 签到
@@ -119,7 +121,7 @@
 # 京喜工厂
 20 * * * * node /scripts/jd_dreamFactory.js >> /scripts/logs/jd_dreamFactory.log 2>&1
 # 京喜工厂开团
-#20 9,13,16 * * * node /scripts/jd_dreamFactory_tuan.js >> /scripts/logs/jd_dreamFactory_tuan.log 2>&1
+20 9,13,16 * * * node /scripts/jd_dreamFactory_tuan.js >> /scripts/logs/jd_dreamFactory_tuan.log 2>&1
 # 东东小窝
 16 6,23 * * * node /scripts/jd_small_home.js >> /scripts/logs/jd_small_home.log 2>&1
 # 东东工厂

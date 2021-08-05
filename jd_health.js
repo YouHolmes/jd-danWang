@@ -348,7 +348,7 @@ function readShareCode() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = ['T018v_V1RR4d_V3QJhib1ACjVfnoaW5kRrbA','T0205KkcO2FbtjWIRWaUyJ9xCjVfnoaW5kRrbA','T0225KkcRxlN91SEJB_xnKFYIQCjVfnoaW5kRrbA','T018aWjelZWTI_xpIBn0kgCjVfnoaW5kRrbA','T0225KkcRxccplfQKUn2kaULcQCjVfnoaW5kRrbA','T0225KkcR09IplzfJEzxkfEMfQCjVfnoaW5kRrbA','T010yqQgGx8a_ACjVfnoaW5kRrbA','T018v_56QB8Q8lPRJhub1ACjVfnoaW5kRrbA','T0109r85GE9HogCjVfnoaW5kRrbA','T018aXLClre6IvRUIhz2kgCjVfnoaW5kRrbA','T0225KkcRktLoVLRKBj8lf4CJQCjVfnoaW5kRrbA','T01096QtF3FRvQCjVfnoaW5kRrbA','T016ZkXdlJadIdpH9ZpVCjVfnoaW5kRrbA',];
+    $.newShareCodes = ['T018v_V1RR4d_V3QJhib1ACjVfnoaW5kRrbA','T0205KkcO2FbtjWIRWaUyJ9xCjVfnoaW5kRrbA','T0225KkcRxlN91SEJB_xnKFYIQCjVfnoaW5kRrbA','T018aWjelZWTI_xpIBn0kgCjVfnoaW5kRrbA','T0225KkcRxccplfQKUn2kaULcQCjVfnoaW5kRrbA','T0225KkcR09IplzfJEzxkfEMfQCjVfnoaW5kRrbA','T010yqQgGx8a_ACjVfnoaW5kRrbA','T018v_56QB8Q8lPRJhub1ACjVfnoaW5kRrbA','T0109r85GE9HogCjVfnoaW5kRrbA','T018aXLClre6IvRUIhz2kgCjVfnoaW5kRrbA','T0225KkcRktLoVLRKBj8lf4CJQCjVfnoaW5kRrbA','T01096QtF3FRvQCjVfnoaW5kRrbA','T016ZkXdlJadIdpH9ZpVCjVfnoaW5kRrbA','T0205KkcPGRNoCq1fF2MwJ1JCjVfnoaW5kRrbA','T015_KwsCEdIqhCOfk0CjVfnoaW5kRrbA','T0116bh0RRYR_F0CjVfnoaW5kRrbA'];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
     }/* else {
