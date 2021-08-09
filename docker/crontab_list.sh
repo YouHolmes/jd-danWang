@@ -40,10 +40,6 @@
 30 */4 * * * node /scripts/jd_joy_park.js >> /scripts/logs/jd_joy_park.log 2>&1
 #汪汪乐园
 30 2,5,20 * * * node /scripts/jd_joy_park_task.js >> /scripts/logs/jd_joy_park_task.log 2>&1
-#燃动夏季
-#10 0,6-23/1 * * * node /scripts/jd_summer_movement.js >> /scripts/logs/jd_summer_movement.log 2>&1
-#燃动夏季SH互助
-#12 7-23 * * * node /scripts/jd_summer_movement_help.js >> /scripts/logs/jd_summer_movement_help.log 2>&1
 #新签到
 10 0,18 * * * node /scripts/jd_NewSign.js >> /scripts/logs/jd_NewSign.log 2>&1
 #早起福利
@@ -61,15 +57,13 @@
 #全民抢京豆
 #1 0,1 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
 #京喜领88元红包
-1 0,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+1 0,6,12,15,18 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #激扬奥运
 0 0,2 * * * node /scripts/jd_olympic.js >> /scripts/logs/jd_olympic.log 2>&1
 #母音甄选
 0 0,3 * * * node /scripts/jd_summer_mom_opencard.js >> /scripts/logs/jd_summer_mom_opencard.log 2>&1
 #京喜首页签到
 20 1,8 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
-#jd_olympic_opencard1
-5 0,18,22 * * * node /scripts/jd_opencard_championship.js >> /scripts/logs/jd_opencard_championship.log 2>&1
 #jd_olympic_opencard2
 10 0,18,22 * * * node /scripts/jd_opencard_olympic_run.js >> /scripts/logs/jd_opencard_olympic_run.log 2>&1
 #jd_olympic_opencard2
@@ -84,6 +78,10 @@
 30 11,17 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #特物
 55 0,18,22 * * * node /scripts/jd_opencard_sum.js >> /scripts/logs/jd_opencard_sum.log 2>&1
+#jd_qixi
+0 0,9,18 * * * node /scripts/jd_qixi.js >> /scripts/logs/jd_qixi.log 2>&1
+#女装盲盒
+54 9,14 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 
 ##############长期活动##############
 # 签到

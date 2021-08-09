@@ -1114,9 +1114,9 @@ async function gotThreeMealForFarm() {
 async function browseAdTaskForFarm(advertId, type) {
   const functionId = arguments.callee.name.toString();
   if (type === 0) {
-    $.browseResult = await request(functionId, {advertId, type});
+    $.browseResult = await request(functionId, { advertId, type, "version": 14, "channel": 1, "babelChannel": "45" });
   } else if (type === 1) {
-    $.browseRwardResult = await request(functionId, {advertId, type});
+    $.browseRwardResult = await request(functionId, { advertId, type, "version": 14, "channel": 1, "babelChannel": "45" });
   }
 }
 // 被水滴砸中API
@@ -1135,7 +1135,7 @@ async function initForFarm() {
   return new Promise(resolve => {
     const option =  {
       url: `${JD_API_HOST}?functionId=initForFarm`,
-      body: `body=${escape(JSON.stringify({"version":4}))}&appid=wh5&clientVersion=9.1.0`,
+      body: `body=${escape(JSON.stringify({"version":14}))}&appid=wh5&clientVersion=9.1.0`,
       headers: {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
@@ -1233,7 +1233,7 @@ function readShareCode() {
           console.log(`${$.name} API请求失败，将切换为备用API`)
           console.log(`随机取助力码放到您固定的互助码后面(不影响已有固定互助)`)
           $.get({url: `https://raw.githubusercontent.com/shuyeshuye/RandomShareCode/main/JD_Fruit.json`, 'timeout': 10000},(err, resp, data)=>{
-            data = JSON.parse(data);})
+          data = JSON.parse(data);})
         } else {
           if (data) {
             console.log(`随机取助力码放到您固定的互助码后面(不影响已有固定互助)`)

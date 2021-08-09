@@ -59,7 +59,7 @@ $.appId = 10028;
   $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
   await requestAlgo();
   await $.wait(1000)
-  let res = []
+  let res = await getAuthorShareCode('https://wuzhi03.coding.net/p/dj/d/shareCodes/git/raw/main/jd_cfd.json')
   $.strMyShareIds = [...(res && res.shareId || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -102,7 +102,7 @@ $.appId = 10028;
         if (!$.canHelp) break
       }
     }
-    /*if (!$.canHelp) continue
+    if (!$.canHelp) continue
     if ($.strMyShareIds && $.strMyShareIds.length) {
       console.log(`\n助力作者\n`);
       for (let id of $.strMyShareIds) {
@@ -111,7 +111,7 @@ $.appId = 10028;
         await $.wait(3000)
         if (!$.canHelp) break
       }
-    }*/
+    }
   }
   await showMsg();
 })()
@@ -138,6 +138,10 @@ async function cfd() {
     //每日签到
     await $.wait(2000)
     await getTakeAggrPage('sign')
+
+    //小程序每日签到
+    await $.wait(2000)
+    await getTakeAggrPage('wxsign')
 
     //助力奖励
     await $.wait(2000)
@@ -476,7 +480,7 @@ async function mermaidOper(strStoryId, dwType, ddwTriggerDay) {
                 console.log(`昨日解救美人鱼领奖成功：获得${data.Data.Prize.strPrizeName}\n`)
               } else {
                 console.log(`昨日解救美人鱼领奖失败：${data.sErrMsg}\n`)
-              }
+              }             
               break
             default:
               break
@@ -589,6 +593,36 @@ async function getTakeAggrPage(type) {
           }
         })
         break
+      case 'wxsign':
+        $.get(taskUrl(`story/GetTakeAggrPage`, '', 6), async (err, resp, data) => {
+          try {
+            if (err) {
+              console.log(`${JSON.stringify(err)}`)
+              console.log(`${$.name} GetTakeAggrPage API请求失败，请检查网路重试`)
+            } else {
+              data = JSON.parse(data);
+              console.log(`小程序每日签到`)
+              for (let key of Object.keys(data.Data.Sign.SignList)) {
+                let vo = data.Data.Sign.SignList[key]
+                if (vo.dwDayId === data.Data.Sign.dwTodayId) {
+                  if (vo.dwStatus !== 1) {
+                    const body = `ddwCoin=${vo.ddwCoin}&ddwMoney=${vo.ddwMoney}&dwPrizeType=${vo.dwPrizeType}&strPrizePool=${vo.strPrizePool}&dwPrizeLv=${vo.dwBingoLevel}`
+                    await rewardSign(body, 6)
+                    await $.wait(2000)
+                  } else {
+                    console.log(`今日已签到\n`)
+                    break
+                  }
+                }
+              }
+            }
+          } catch (e) {
+            $.logErr(e, resp);
+          } finally {
+            resolve();
+          }
+        })
+        break
       case 'helpdraw':
         $.get(taskUrl(`story/GetTakeAggrPage`), async (err, resp, data) => {
           try {
@@ -626,9 +660,9 @@ async function getTakeAggrPage(type) {
     }
   })
 }
-function rewardSign(body) {
+function rewardSign(body, dwEnv = 7) {
   return new Promise((resolve) => {
-    $.get(taskUrl(`story/RewardSign`, body), (err, resp, data) => {
+    $.get(taskUrl(`story/RewardSign`, body, dwEnv), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -1477,8 +1511,8 @@ function biz(contents){
   })
 }
 
-function taskUrl(function_path, body = '') {
-  let url = `${JD_API_HOST}jxbfd/${function_path}?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=138631.26.55&${body}&_stk=_cfd_t%2CbizCode%2CddwTaskId%2CdwEnv%2Cptag%2Csource%2CstrShareId%2CstrZone&_ste=1`;
+function taskUrl(function_path, body = '', dwEnv = 7) {
+  let url = `${JD_API_HOST}jxbfd/${function_path}?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=${dwEnv}&_cfd_t=${Date.now()}&ptag=138631.26.55&${body}&_stk=_cfd_t%2CbizCode%2CddwTaskId%2CdwEnv%2Cptag%2Csource%2CstrShareId%2CstrZone&_ste=1`;
   url += `&h5st=${decrypt(Date.now(), '', '', url)}&_=${Date.now() + 2}&sceneval=2&g_login_type=1&g_ty=ls`;
   return {
     url,
@@ -1514,6 +1548,7 @@ function taskListUrl(function_path, body = '', bizCode = 'jxbfd') {
     timeout: 10000
   };
 }
+
 function randomString() {
   return Math.random().toString(16).slice(2, 10) +
     Math.random().toString(16).slice(2, 10) +

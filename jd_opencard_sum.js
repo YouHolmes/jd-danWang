@@ -536,7 +536,7 @@ function getHtml() {
         'Host':'lzdz1-isv.isvjcloud.com',
         'X-Requested-With': 'com.jingdong.app.mall',
         'Cookie': `IsvToken=${$.isvObfuscatorToken}; LZ_TOKEN_KEY=${$.LZ_TOKEN_KEY}; LZ_TOKEN_VALUE=${$.LZ_TOKEN_VALUE}; AUTH_C_USER=${$.secretPin}; ${$.lz_jdpin_token}`,
-  }
+      }
     }, async (err, resp, data) => {
       try {
         if (err) {

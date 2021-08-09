@@ -191,7 +191,7 @@ async function getCommodities() {
       try {
         if (safeGet(data)) {
           data = $.toObj(data)
-          let beans = data.data.result.jBeans.filter(x => x.status !== 0 && x.status !== 1)
+          let beans = data.data.result.jBeans.filter(x => x.status !== 1)
           if (beans.length !== 0) {
             for (let key of Object.keys(beans)) {
               let vo = beans[key]
