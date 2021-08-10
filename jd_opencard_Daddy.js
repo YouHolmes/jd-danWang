@@ -65,7 +65,7 @@ if (!$.isNode() || !process.env.JD_OPENCARD_DADDY) {
         });
         return;
     }
-    $.shareUuid = '4bb7742609a747d8a34f0aea043887a2'
+    $.shareUuid = 'd12a5af8d18d475a9ea7a61ea155f46c'
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
         if (cookie) {
@@ -118,9 +118,9 @@ if (!$.isNode() || !process.env.JD_OPENCARD_DADDY) {
             await getSimpleActInfoVo()
             await getActorUuid();
             await getActorUuid();
-            /*$.log($.shareUuid)
+            /*$.shareUuid = $.actorUuid;
+            $.log($.shareUuid)
             if (i === 0 && $.actorUuid) {
-                $.shareUuid = $.actorUuid;
             }*/
             if ($.index == jd_opencard_Daddy) {
                 $.log(`你设置到${jd_opencard_Daddy} 停止，如果不如意请设置 JD_OPENCARD_DADDY变量，注意看js说明！！！没有设置默认11停`)

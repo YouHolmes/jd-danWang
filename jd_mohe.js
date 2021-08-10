@@ -79,7 +79,7 @@ $.shareId = [];
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage, {"open-url": "https://blindbox5g.jd.com"})
   }
-  $.shareId = [...($.shareId || []), ...($.updatePkActivityIdRes || [])];
+  $.shareId = ['dace7abb-b143-4664-a35b-9e5d532ac74b','02a3396b-8259-4112-b1df-153b86c4ab92','6cd3c3e4-e7df-44e4-8b71-6f4e12b17a40','5060d5d1-f742-4133-8aee-4e92b948cbc1','6c2a0ffc-5f9e-42fc-8071-ab8e23e90fc0','7c7694a6-9bd8-42d9-8de0-91c9c85de8e5','55252ec6-d893-4b2e-a702-93151558fbdf','55252ec6-d893-4b2e-a702-93151558fbdf','c4ce2931-c855-4d08-8e67-325d2c234a68'];
   for (let v = 0; v < cookiesArr.length; v++) {
     cookie = cookiesArr[v];
     $.index = v + 1;
@@ -220,8 +220,8 @@ function getCoin() {
   })
 }
 
-function taskList() {
-  return new Promise((resolve) => {
+async function taskList() {
+  return new Promise(async (resolve) => {
     const body = {"apiMapping":"/active/taskList"}
     $.get(taskurl(body), async (err, resp, data) => {
       try {
@@ -231,17 +231,23 @@ function taskList() {
           //浏览商品
           if (task4.finishNum < task4.totalNum) {
             await browseProduct(task4.skuId);
+            await $.wait(2000)
             await taskCoin(task4.type);
+            await $.wait(2000)
           }
           //浏览会场
           if (task1.finishNum < task1.totalNum) {
             await strollActive((task1.finishNum + 1));
+            await $.wait(2000)
             await taskCoin(task1.type);
+            await $.wait(2000)
           }
           //关注或浏览店铺
           if (task2.finishNum < task2.totalNum) {
             await followShop(task2.shopId);
+            await $.wait(2000)
             await taskCoin(task2.type);
+            await $.wait(2000)
           }
           // if (task5.finishNum < task5.totalNum) {
           //   console.log(`\n\n分享好友助力 ${task5.finishNum}/${task5.totalNum}\n\n`)

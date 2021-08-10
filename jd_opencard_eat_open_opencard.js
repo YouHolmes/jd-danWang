@@ -63,7 +63,7 @@ if (!$.isNode() || !process.env.JD_OPENCARD_EAT_OPEN_OPENCARD) {
         });
         return;
     }
-    $.shareUuid = '674909410c3641e38bbffeacf1e33b6d'
+    $.shareUuid = '9e269f6fc0664d1da8e74e8ec126e6ba'
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
         if (cookie) {

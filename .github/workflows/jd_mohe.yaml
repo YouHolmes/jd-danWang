@@ -6,7 +6,7 @@ name: jd_mohe-5g超级盲盒
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 */4 * * *"
+        - cron: "6 7,10,14 * * *"
     watch:
         types: [started]
     repository_dispatch:

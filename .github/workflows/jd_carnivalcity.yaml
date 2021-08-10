@@ -1,16 +1,16 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_opencard_sum
+name: jd_carnivalcity
 
 on:
     workflow_dispatch:
     schedule:
-        - cron: "1 16,23,1,14 * * *"
+        - cron: "1 7,10 * * *"
     watch:
         types: [started]
     repository_dispatch:
-        types: jd_opencard_sum
+        types: jd_carnivalcity
 
 jobs:
     build:
@@ -25,9 +25,9 @@ jobs:
             - name: npm install
               run: |
                   npm install
-            - name: "运行 【冰爽夏日】"
+            - name: "运行 【手机狂欢城】"
               run: |
-                  node jd_opencard_sum.js
+                  node jd_carnivalcity.js
               env:
                   JD_COOKIE: ${{ github.event.client_payload.JD_COOKIE || secrets.JD_COOKIE }}
                   JD_DEBUG: ${{ github.event.client_payload.JD_DEBUG || secrets.JD_DEBUG }}
