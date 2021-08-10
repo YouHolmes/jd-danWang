@@ -6,7 +6,7 @@ name: jd_bean_home-领京豆额外奖励
 on:
     workflow_dispatch:
     schedule:
-        - cron: "12 16,23 * * *"
+        - cron: "12 4,6 * * *"
     watch:
         types: [started]
     repository_dispatch:

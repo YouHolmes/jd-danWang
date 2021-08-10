@@ -42,13 +42,14 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 !(async () => {
   $.newShareCodes = []
   $.authorCode = [
-      '949D23BA4BF155E896ED2741E763777A',
-      '6C177B528326CE25E235892EADA721B9AD1DAAB9A3E3F6CBAFDE81EEB7393333',
-      'E0D615F28CF0B201D5244D6C12F7A8FD',
-      '7CD6B2A0B1621FCA9F9286A10D1276F8AD1DAAB9A3E3F6CBAFDE81EEB7393333',
-      '35AD168859F2C38C31BF96C538BB1D03AD1DAAB9A3E3F6CBAFDE81EEB7393333',
-      'A582C750896BD0570150BB28F2142A84',
-      'FF48BA00E268024691968622DF67A839'
+    {"shareCode":'949D23BA4BF155E896ED2741E763777A',"groupCode":'874450297014210560'},
+    {"shareCode":'6C177B528326CE25E235892EADA721B9AD1DAAB9A3E3F6CBAFDE81EEB7393333',"groupCode":'874450783824400384'},
+    {"shareCode":'3761736778997EE72DBA545BBE945B85',"groupCode":'874451271440683008'},
+    {"shareCode":'E0D615F28CF0B201D5244D6C12F7A8FD',"groupCode":'874452922721783808'},
+    {"shareCode":'7CD6B2A0B1621FCA9F9286A10D1276F8AD1DAAB9A3E3F6CBAFDE81EEB7393333',"groupCode":'874453277765816320'},
+    {"shareCode":'35AD168859F2C38C31BF96C538BB1D03AD1DAAB9A3E3F6CBAFDE81EEB7393333',"groupCode":'874453660407189504'},
+    {"shareCode":'A582C750896BD0570150BB28F2142A84',"groupCode":'874454012525826048'},
+    {"shareCode":'FF48BA00E268024691968622DF67A839',"groupCode":'874454713602691072'}
   ]
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -108,6 +109,7 @@ const JD_API_HOST = 'https://api.m.jd.com/';
       }
       for (let j = 1; j < $.newShareCodes.length && $.canHelp; j++) {
         let code = $.newShareCodes[j];
+        console.log(code)
         if(code[2] && code[2] ===  $.UserName){
           //不助力自己
         } else {
