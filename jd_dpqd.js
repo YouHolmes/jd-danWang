@@ -3,38 +3,25 @@
 搬运cui521大佬脚本，请勿外传！！！
 */
 const $ = new Env('店铺签到');
-
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 const JD_API_HOST = 'https://api.m.jd.com/api?appid=interCenter_shopSign';
-
 let activityId = ''
 let vender = ''
 let num = 0
 let shopname = ''
 const token = [
-  '892C0EE8D4E64EEE821CDD45684312E0',
-  'EFFD0BF4069A8B6882A55FB07ACDA60F',
-  '26387788BAE04FCC685B106BFDFA7675',
-  '46534679506709BBCB1832DE399A969A',
-  '7B3581A8967257F41B5784DDB82E5123',
-  '93830BBF47902063E14135B2822BAA0C',
-  'CE88E5242954E4B97D0B8B387D8B5607',
-  '0D4DBA95792917F93626E8A31604754E',
-  'B6ADD43C62C27D2473BF413C5EFE65C9',
-  '5A80A78E6AE61D6DFD7AD1757A430487',
-  '564B04E590F3F04F56A6C8B6C6BBABAC',
-  'F6C0C8F08D24FBAFF4AA27755D12BB23',
-  '434DAE741BE9A0490553DAF956FEFE65',
-  'B15EC4C26506B99CDDB6023EDFCF9F49',
-  '77B06BE4BC3332D9674AD871C7DF5065',
-  '1F78C099BAD778319E5FBD3277ADC359',
-  'BE39683048A55D29F61AC1EF691024A2',
-  '0EC261B208C33C8B91CBF64841CFABAD',
-  '2215A038745A22795855358B459F32BB',
+  '892C0EE8D4E64EEE821CDD45684312E0',//1
+  'EFFD0BF4069A8B6882A55FB07ACDA60F',//2
+  '26387788BAE04FCC685B106BFDFA7675',//3
+  '46534679506709BBCB1832DE399A969A',//4
+  'CE88E5242954E4B97D0B8B387D8B5607',//5
+  '5A80A78E6AE61D6DFD7AD1757A430487',//6
+  'E528907E4FEC60FC75CBFE1BAFA95F8D',//7天，40豆；15天，100豆；30天，100豆;
+  '9BABD41E5674FD5791963D5366BEC634',//每日，1豆；5天，10豆；21天，100豆;
 ]
 //IOS等用户直接用NobyDa的jd cookie
 
@@ -81,12 +68,12 @@ if ($.isNode()) {
     }
   }
 })()
-  .catch((e) => {
-    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-  })
-  .finally(() => {
-    $.done();
-  })
+    .catch((e) => {
+      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+    })
+    .finally(() => {
+      $.done();
+    })
 
 //开始店铺签到
 async function dpqd() {

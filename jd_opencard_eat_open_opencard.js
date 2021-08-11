@@ -115,10 +115,10 @@ if (!$.isNode() || !process.env.JD_OPENCARD_EAT_OPEN_OPENCARD) {
             await saveTask()
             await checkOpenCard();
             await getDrawRecordHasCoupon()
-            /*if ($.actorUuid) {
-                $.shareUuid = $.actorUuid;
-            }
+            /*$.shareUuid = $.actorUuid;
             $.log($.shareUuid)*/
+            /*if ($.actorUuid) {
+            }*/
             if ($.index == jd_opencard_eat_open_opencard) {
                 $.log(`你设置到${jd_opencard_eat_open_opencard} 停止，如果不如意请设置 JD_OPENCARD_EAT_OPEN_OPENCARD变量，注意看js说明！！！没有设置默认11停`)
                 break;
