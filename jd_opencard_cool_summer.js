@@ -48,7 +48,7 @@ if (!$.isNode() || !process.env.JD_OPENCARD_COOL_SUMMER) {
     $.log(`请设置env变量 JD_OPENCARD_COOL_SUMMER    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
     $.log(`请设置env变量 JD_OPENCARD_COOL_SUMMER    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
     $.log(`请设置env变量 JD_OPENCARD_COOL_SUMMER    填写11就是跑到11个ck就停止  填写21就是跑到21个ck就停止 一天最多助力20个ck 推荐10的倍数 +1 填写！！`)
-    jd_opencard_cool_summer = 21
+    jd_opencard_cool_summer = 41
 } else {
     jd_opencard_cool_summer = Number(process.env.JD_OPENCARD_COOL_SUMMER)
     $.log(`你设置了JD_OPENCARD_EAT_OPEN_OPENCARD变量 运行到 ${jd_opencard_cool_summer} ck停止`)
