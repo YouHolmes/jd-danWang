@@ -3,7 +3,7 @@ name: jd_dreamFactory-京喜工厂
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 */1 * * *"
+        - cron: "0 4-15/1 * * *"
     watch:
         types: [started]
     repository_dispatch:
@@ -50,4 +50,3 @@ jobs:
                   #专属配置
                   IGNORE_COOKIE_JXGC: ${{ github.event.client_payload.IGNORE_COOKIE_JXGC || secrets.IGNORE_COOKIE_JXGC }} #京喜工厂禁用某些cookie的执行,因为通知太烦了呀,比如要禁用第2和第四个的执行,则填入[2,4]即可,包含中括号哦
                   DREAMFACTORY_FORBID_ACCOUNT: ${{ github.event.client_payload.DREAMFACTORY_FORBID_ACCOUNT || secrets.DREAMFACTORY_FORBID_ACCOUNT }} #京喜工厂禁用某些cookie的执行,因为通知太烦了呀,比如要禁用第2和第四个的执行,则填入[2,4]即可,包含中括号哦
-      
