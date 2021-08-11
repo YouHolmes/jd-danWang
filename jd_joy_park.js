@@ -33,7 +33,28 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-$.invitePinTaskList = []
+$.invitePinTaskList = [
+  'MNoyFZ3cGkoq1xm5fbCZnw',
+  'qHi7Z7ILSZ2vua283FWEMA',
+  '-v-uHFtyqhEx5m2zHWgD_cgKNuZqlkr3AikK8XgVhhA',
+  '-8M3o0hlv0X5d7eKM2MSVg',
+  'logxyDuydiatzyjU0cSOCA',
+    '-AzCWFDyt-82OOquDz-QCw',
+  'en8_c6aKHnasaU59yVku8w',
+  'Ogkm1P1LXo6KFsSLrZz4vg',
+  'B4ODsAT8Yu1ZDOYSvkgy5A',
+  'DjkEm19zRU8L-DOMhS0p9g',
+  'WjvAoMfxy318hN4OR4hkfQ',
+  'rjv9fwz9BYVWri9df22GOA',
+  'QCwt4tgaTzS1pBj_M9PyKA',
+    'LSlrd2192B0E8tQ2rYqkMw',
+    'dMS6d92WXCzkxnIYA_SDVA',
+  'dXQFu7RcxwqYAyhKrq6AzAv0gECeOuNls25hlQrkmfU',
+  'QqE4tJIPkYd1hfHe3jg0RiMdsPv1cCEcsiEYqsfi3bI',
+    'NA0wO8GINe7n7uBkdfLbOw',
+    'ErPdzgODFod0zbleedKn1g'
+
+]
 $.invitePin = []
 const JD_API_HOST = `https://api.m.jd.com/client.action`;
 message = ""

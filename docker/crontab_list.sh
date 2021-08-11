@@ -63,7 +63,13 @@
 #京喜首页签到
 20 1,8 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
 #jd_olympic_opencard2
-50 0,18,22 * * * node /scripts/jd_opencard_eat_open_opencard.js >> /scripts/logs/jd_opencard_eat_open_opencard.log 2>&1
+50 1,17,23 * * * node /scripts/jd_goldPhone.js >> /scripts/logs/jd_goldPhone.log 2>&1
+#jd_olympic_opencard2
+35 0,16,22 * * * node /scripts/jd_opencard_sum.js >> /scripts/logs/jd_opencard_sum.log 2>&1
+#jd_olympic_opencard2
+50 0,18,22 * * * node /scripts/jd_opencard_sum2.js >> /scripts/logs/jd_opencard_sum2.log 2>&1
+#jd_olympic_opencard2
+25 0,18,22 * * * node /scripts/jd_opencard_eat_open_opencard.js >> /scripts/logs/jd_opencard_eat_open_opencard.log 2>&1
 #jd_olympic_opencard2
 20 0,18,22 * * * node /scripts/jd_opencard_cool_summer.js >> /scripts/logs/jd_opencard_cool_summer.log 2>&1
 #jd_olympic_opencard2
