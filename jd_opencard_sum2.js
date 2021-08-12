@@ -48,7 +48,7 @@ message = ""
     });
     return;
   }
-  $.shareUuid = 'c041167996f547fdb75aec2d7c43b12e'
+  $.shareUuid = '2f05c72d49c944b3bb12fa4d48144c8a'
   $.activityId = 'b856fb097683415facd1ae733672de9e'
   console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/4768159?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
   for (let i = 0; i < cookiesArr.length; i++) {

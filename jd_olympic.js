@@ -48,7 +48,7 @@ message = ""
     });
     return;
   }
-  $.shareUuid = 'e8ea154bee784eab94d7a83806b0eea1'
+  $.shareUuid = 'd871f9318bd5417bb3d52da953d59398'
   $.activityId = 'dz2108100001616201'
   console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/shop/league/activity/7277549?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
   for (let i = 0; i < cookiesArr.length; i++) {
