@@ -88,8 +88,10 @@
 0 1 * * * node /scripts/jd_ryhxj.js >> /scripts/logs/jd_ryhxj.log 2>&1
 # 来电好物季
 10 1 * * * node /scripts/jd_ldhwj.js >> /scripts/logs/jd_ldhwj.log 2>&1
-# 来电好物季
+# 京小鸽吾悦寄
 10 4,9 * * * node /scripts/jd_jxg.js >> /scripts/logs/jd_jxg.log 2>&1
+# 汽车生活季
+30 9,21 12-20 8 * node /scripts/jd_qcshj.js >> /scripts/logs/jd_qcshj.log 2>&1
 
 ##############长期活动##############
 # 签到

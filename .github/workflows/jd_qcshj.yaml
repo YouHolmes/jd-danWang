@@ -1,16 +1,16 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_redPacket-全民开红包
+name: jd_qcshj-汽车生活季
 
 on:
     workflow_dispatch:
     schedule:
-        - cron: "6 22,6,9 * * *"
+        - cron: "30 9,21 12-20 8 *"
     watch:
         types: [started]
     repository_dispatch:
-        types: jd_redPacket
+        types: jd_qcshj
 
 jobs:
     build:
@@ -25,9 +25,9 @@ jobs:
             - name: npm install
               run: |
                   npm install
-            - name: "运行 【京东全民抢红包】"
+            - name: "运行 【汽车生活季】"
               run: |
-                  node jd_redPacket.js
+                  node jd_qcshj.js
               env:
                   JD_COOKIE: ${{ github.event.client_payload.JD_COOKIE || secrets.JD_COOKIE }}
                   JD_DEBUG: ${{ github.event.client_payload.JD_DEBUG || secrets.JD_DEBUG }}
@@ -46,4 +46,6 @@ jobs:
                   QYWX_AM: ${{ github.event.client_payload.QYWX_AM || secrets.QYWX_AM }}
                   PUSH_PLUS_TOKEN: ${{ github.event.client_payload.PUSH_PLUS_TOKEN || secrets.PUSH_PLUS_TOKEN }}
                   PUSH_PLUS_USER: ${{ github.event.client_payload.PUSH_PLUS_USER || secrets.PUSH_PLUS_USER }}
-                  SYNCURL: https://github.com/wuzhi03/MyActions/raw/main/jd_redPacket.js
+                  PET_NOTIFY_CONTROL: ${{ github.event.client_payload.PET_NOTIFY_CONTROL || secrets.PET_NOTIFY_CONTROL }}
+                  PETSHARECODES: ${{ github.event.client_payload.PETSHARECODES || secrets.PETSHARECODES }}
+                  SYNCURL: https://github.com/wuzhi03/MyActions/raw/main/jd_pet.js
