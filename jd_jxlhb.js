@@ -46,12 +46,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       '温馨提示：如提示助力火爆，可尝试寻找京东客服')
   let res = []
   if (res && res.activeId) $.activeId = res.activeId;
-  $.authorMyShareIds = [
-      'PQoYDC3_grjIIMDtN2m181kzLxn5yhHOFGOS8XikJkpVB501dohOJ1sZ5YGaBVRY',
-      'uD8LI656MTUo6GqQuaoczLXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
-      'uD8LI656MTUo6GqQuaoczLYuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
-      'uD8LI656MTUo6GqQuaoczOVQbRLnjNiIvo1VWb1p88yHJ2KOdD5ZkCoAQAyokddD'
-  ];
+  $.authorMyShareIds = [];
   //开启红包,获取互助码
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
@@ -81,13 +76,13 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
     $.canHelp = true;
     $.max = false;
-    for (let item of $.authorMyShareIds) {
+    /*for (let item of $.authorMyShareIds) {
       if (!item) continue;
       await enrollFriend(item);
       await $.wait(3000);
       if ($.max) continue
       if (!$.canHelp) break
-    }
+    }*/
     for (let code of $.packetIdArr) {
       if (!code) continue;
       if ($.UserName === code['userName']) continue;
