@@ -242,7 +242,7 @@ function getAuthorShareCode(url) {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = ['828368cb-d472-4bde-8c58-5aacf6564d50','d4540d31-f684-42c1-a89b-df95e2e27e1a','44ba12b4-d6d8-4f6f-8f4c-8462aee45c0e','f2740e11-c057-4d06-baf7-8930357030fc'];
+    $.newShareCodes = ['3027a88b-f630-4c62-b39b-6468208a22e4','1ca791f5-42e1-4c09-b77f-a16810b71e6e','e8766535-ef45-4fcb-833d-5397b7789745','aa6df314-1245-4963-a140-34c9899d2cd6'];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
     }/* else {

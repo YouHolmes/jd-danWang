@@ -633,7 +633,7 @@ function getListRank() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = ['9d08ae17-c30f-4406-bed0-3fc9df6c07ca','ac7d912a-841b-4cb9-922c-58eabddc55c8','e421345d-9f33-454f-8013-cabfa8472b3f'];
+    $.newShareCodes = ['3027a88b-f630-4c62-b39b-6468208a22e4','1ca791f5-42e1-4c09-b77f-a16810b71e6e','e8766535-ef45-4fcb-833d-5397b7789745','aa6df314-1245-4963-a140-34c9899d2cd6'];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
     }/* else {
