@@ -654,12 +654,12 @@ async function getShareCode() {
   console.log(`======账号${$.index}开始======`)
   await getJdFactory()
   await getJxFactory()
-  await getJxNc()
+  //await getJxNc()
   await getJdPet()
   await getPlantBean()
   await getJDFruit()
-  await getJdZZ()
-  await getJoy()
+  //await getJdZZ()
+  //await getJoy()
   console.log(`======账号${$.index}结束======\n`)
 }
 
