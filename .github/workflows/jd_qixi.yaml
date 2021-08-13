@@ -7,7 +7,7 @@ name: jd_qixi
 on:
     workflow_dispatch:
     schedule:
-        - cron: "10 4,14,16 * * *"
+        - cron: "1 16,23,1,14 * * *"
     watch:
         types: [started]
     repository_dispatch:
