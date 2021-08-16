@@ -1,7 +1,8 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_goldPhone
+name: jd_xiaolong
+
 
 on:
     workflow_dispatch:
@@ -10,24 +11,25 @@ on:
     watch:
         types: [started]
     repository_dispatch:
-        types: jd_goldPhone
+        types: jd_xiaolong
 
 jobs:
     build:
         runs-on: ubuntu-latest
         if: github.event.repository.owner.id == github.event.sender.id
         steps:
-            - uses: actions/checkout@v1
-            - name: Use Node.js 10.x
+            - name: 拉取代码
+              uses: actions/checkout@v2
+            - name: Use Node.js
               uses: actions/setup-node@v1
               with:
-                  node-version: 10.x
-            - name: npm install
+                  node-version: "12.x"
+            - name: 安装依赖包
               run: |
                   npm install
-            - name: "运行 【激扬奥运】"
+            - name: "运行【jd_xiaolong】"
               run: |
-                  node jd_goldPhone.js
+                  node jd_xiaolong.js
               env:
                   JD_COOKIE: ${{ github.event.client_payload.JD_COOKIE || secrets.JD_COOKIE }}
                   JD_DEBUG: ${{ github.event.client_payload.JD_DEBUG || secrets.JD_DEBUG }}
@@ -46,6 +48,4 @@ jobs:
                   QYWX_AM: ${{ github.event.client_payload.QYWX_AM || secrets.QYWX_AM }}
                   PUSH_PLUS_TOKEN: ${{ github.event.client_payload.PUSH_PLUS_TOKEN || secrets.PUSH_PLUS_TOKEN }}
                   PUSH_PLUS_USER: ${{ github.event.client_payload.PUSH_PLUS_USER || secrets.PUSH_PLUS_USER }}
-                  JD_CASH_SHARECODES: ${{ github.event.client_payload.JD_CASH_SHARECODES || secrets.JD_CASH_SHARECODES }}
-                  CASH_NOTIFY_CONTROL: ${{ github.event.client_payload.CASH_NOTIFY_CONTROL || secrets.CASH_NOTIFY_CONTROL }}
-                  SYNCURL: https://github.com/wuzhi03/MyActions/raw/main/jd_cash.js
+                  SYNCURL: https://github.com/wuzhi04/MyActions/raw/main/jd_xiaolong.js

@@ -63,8 +63,6 @@
 #京喜首页签到
 20 1,8 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
 #jd_olympic_opencard2
-50 1,17,23 * * * node /scripts/jd_goldPhone.js >> /scripts/logs/jd_goldPhone.log 2>&1
-#jd_olympic_opencard2
 35 0,16,22 * * * node /scripts/jd_opencard_sum.js >> /scripts/logs/jd_opencard_sum.log 2>&1
 #jd_olympic_opencard2
 50 0,18,22 * * * node /scripts/jd_opencard_sum2.js >> /scripts/logs/jd_opencard_sum2.log 2>&1
@@ -96,6 +94,10 @@
 31 8,22 13-31 8 * node /scripts/jd_xmGame.js >> /scripts/logs/jd_xmGame.log 2>&1
 #特物
 30 8,9 * * * node /scripts/jd_productZ4Brand.js >> /scripts/logs/jd_productZ4Brand.log 2>&1
+#jd_xiaolong
+15 0,9,18,22 * * * node /scripts/jd_xiaolong.js >> /scripts/logs/jd_xiaolong.log 2>&1
+# 金机奖投票
+33 1,6,9 8-20 8 * node /scripts/jd_jinji.js >> /scripts/logs/jd_jinji.log 2>&1
 
 ##############长期活动##############
 # 签到
