@@ -1,4 +1,3 @@
-// @grant    require
 /*
 jd宠汪汪 搬的https://github.com/uniqueque/QuantumultX/blob/4c1572d93d4d4f883f483f907120a75d925a693e/Script/jd_joy.js
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -26,7 +25,7 @@ cron "15 0-23/2 * * *" script-path=jd_joy.js,tag=京东宠汪汪
 京东宠汪汪 = type=cron,script-path=jd_joy.js, cronexpr="15 0-23/2 * * *", timeout=3600, enable=true
 */
 const $ = new Env('宠汪汪');
-const zooFaker = require('./JDJRValidator_Pure');
+const zooFaker = require('./utils/JDJRValidator_Pure');
 $.get = zooFaker.injectToRequest2($.get.bind($));
 $.post = zooFaker.injectToRequest2($.post.bind($));
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -78,7 +77,7 @@ const weAppUrl = 'https://draw.jdfcloud.com//pet';
       message = '';
       subTitle = '';
       $.validate = '';
-      // const zooFaker = require('./JDJRValidator_Pure');
+      // const zooFaker = require('./utils/JDJRValidator_Pure');
       // $.validate = await zooFaker.injectToRequest()
       await jdJoy();
       await showMsg();
