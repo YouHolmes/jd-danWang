@@ -6,7 +6,7 @@ name: jd_bean_change-京豆昨日收益
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 23 * * *"
+        - cron: "0 4 * * *"
     watch:
         types: [started]
     repository_dispatch:
