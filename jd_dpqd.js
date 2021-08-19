@@ -14,14 +14,11 @@ let vender = ''
 let num = 0
 let shopname = ''
 const token = [
-  '892C0EE8D4E64EEE821CDD45684312E0',//1
+  '3F6F1ABCC2D60622F891898018F0A6E2',//每日，1豆；1天，2豆；3天，5豆；7天；10豆；15天，50豆；30天；100豆；
+  'B15EC4C26506B99CDDB6023EDFCF9F49',//3天，100豆；
   'EFFD0BF4069A8B6882A55FB07ACDA60F',//2
-  '26387788BAE04FCC685B106BFDFA7675',//3
-  '46534679506709BBCB1832DE399A969A',//4
-  'CE88E5242954E4B97D0B8B387D8B5607',//5
-  '5A80A78E6AE61D6DFD7AD1757A430487',//6
-  'E528907E4FEC60FC75CBFE1BAFA95F8D',//7天，40豆；15天，100豆；30天，100豆;
-  '9BABD41E5674FD5791963D5366BEC634',//每日，1豆；5天，10豆；21天，100豆;
+  '517AD3C83C8D5EE281BB808BFF283C17',//签到28天，100京豆
+  'E528907E4FEC60FC75CBFE1BAFA95F8D'//7天，40豆；15天，100豆；30天，100豆;
 ]
 //IOS等用户直接用NobyDa的jd cookie
 
@@ -68,12 +65,12 @@ if ($.isNode()) {
     }
   }
 })()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.done();
-    })
+  .catch((e) => {
+    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+  })
+  .finally(() => {
+    $.done();
+  })
 
 //开始店铺签到
 async function dpqd() {

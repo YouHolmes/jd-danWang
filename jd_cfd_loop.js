@@ -1,4 +1,3 @@
-// @grant    require
 /*
 京喜财富岛热气球挂机
 
@@ -41,8 +40,7 @@ $.appId = 10028;
   await requestAlgo();
   await $.wait(1000)
   console.log('\n')
-  const loop_limit = $.isNode() ? (process.env.CFD_LOOP_LIMIT ? process.env.CFD_LOOP_LIMIT : 20) : ($.getdata('CFD_LOOP_LIMIT') ? $.getdata('CFD_LOOP_LIMIT') : 20)
-  while (count < loop_limit) {
+  while (true) {
     count++
     console.log(`============开始第${count}次挂机=============`)
     for (let i = 0; i < cookiesArr.length; i++) {

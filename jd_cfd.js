@@ -1,4 +1,3 @@
-// @grant    require
 /*
 京喜财富岛
 cron 5 * * * * jd_cfd.js
@@ -61,7 +60,7 @@ $.appId = 10028;
   await requestAlgo();
   await $.wait(1000)
   let res = []
-  $.strMyShareIds = [...(res && res.shareId || [])]
+  $.strMyShareIds = []
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -663,7 +662,7 @@ async function getTakeAggrPage(type) {
 }
 function rewardSign(body, dwEnv = 7) {
   return new Promise((resolve) => {
-     $.get(taskUrl(`story/RewardSign`, body, dwEnv), (err, resp, data) => {
+    $.get(taskUrl(`story/RewardSign`, body, dwEnv), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -1551,7 +1550,7 @@ function taskListUrl(function_path, body = '', bizCode = 'jxbfd') {
 }
 
 function randomString(e) {
- e = e || 32;
+  e = e || 32;
   let t = "0123456789abcdef", a = t.length, n = "";
   for (let i = 0; i < e; i++)
     n += t.charAt(Math.floor(Math.random() * a));

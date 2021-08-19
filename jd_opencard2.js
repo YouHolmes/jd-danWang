@@ -1,29 +1,29 @@
 /*
-邀请一人20豆 (有可能没有豆
+邀请一人20豆 被邀请也有20豆(有可能没有豆
 开2组卡 抽奖可能获得30京豆(有可能有抽到空气💨
 关注10京豆 (有可能是空气💨
-加购没有豆只获得游戏机会 (默认不加购 如需加购请设置环境变量[guaopencard_addSku14]为"true"
+加购5京豆 (有可能是空气💨 默认不加购 如需加购请设置环境变量[guaopencard_addSku12]为"true"
 
 第一个账号助力作者 其他依次助力CK1
 第一个CK失效会退出脚本
 ————————————————
-入口：[8.18-8.31 冰爽来袭 玩撞一夏 (https://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=8461aaca3fd24c66a3674da99c5342eb&shareUuid=728d3bcf90344649812eae11cb0cc901)]
+入口：[8.18-8.25 全民818 一“促”即发 (https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/7373565?activityId=02d54511202b4d1781088b66b9e07b9c&shareUuid=9b5556db5861487499ce8aa274ae15d0)]
 ============Quantumultx===============
 [task_local]
-#8.18-8.31 冰爽来袭 玩撞一夏
-18 9,22 18-31 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard14.js, tag=8.18-8.31 冰爽来袭 玩撞一夏, enabled=true
+#8.18-8.25 全民818 一“促”即发
+30 9,21 18-25 8 * https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard12.js, tag=8.18-8.25 全民818 一“促”即发, enabled=true
 
 ================Loon==============
 [Script]
-cron "18 9,22 18-31 8 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard14.js,tag=8.18-8.31 冰爽来袭 玩撞一夏
+cron "30 9,21 18-25 8 *" script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard12.js,tag=8.18-8.25 全民818 一“促”即发
 
 ===============Surge=================
-8.18-8.31 冰爽来袭 玩撞一夏 = type=cron,cronexp="18 9,22 18-31 8 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard14.js
+8.18-8.25 全民818 一“促”即发 = type=cron,cronexp="30 9,21 18-25 8 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard12.js
 
 ============小火箭=========
-8.18-8.31 冰爽来袭 玩撞一夏 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard14.js, cronexpr="18 9,22 18-31 8 *", timeout=3600, enable=true
+8.18-8.25 全民818 一“促”即发 = type=cron,script-path=https://raw.githubusercontent.com/smiek2221/scripts/master/gua_opencard12.js, cronexpr="30 9,21 18-25 8 *", timeout=3600, enable=true
 */
-const $ = new Env('8.18-8.31 冰爽来袭 玩撞一夏');
+const $ = new Env('8.18-8.25 全民818 一“促”即发');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
@@ -39,7 +39,7 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 let guaopencard_addSku = false
-guaopencard_addSku = $.isNode() ? (process.env.guaopencard_addSku14 ? process.env.guaopencard_addSku14 : `${guaopencard_addSku}`) : ($.getdata('guaopencard_addSku14') ? $.getdata('guaopencard_addSku14') : `${guaopencard_addSku}`);
+guaopencard_addSku = $.isNode() ? (process.env.guaopencard_addSku12 ? process.env.guaopencard_addSku12 : `${guaopencard_addSku}`) : ($.getdata('guaopencard_addSku12') ? $.getdata('guaopencard_addSku12') : `${guaopencard_addSku}`);
 message = ""
 !(async () => {
   if (!cookiesArr[0]) {
@@ -48,10 +48,9 @@ message = ""
     });
     return;
   }
-
-  $.shareUuid = '4ac331f83e6747adb41fa325f9965f37'
-  $.activityId = '8461aaca3fd24c66a3674da99c5342eb'
-  console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
+  $.shareUuid = '2c61a8f8bd074bf6baf609e4982c4c36'
+  $.activityId = '02d54511202b4d1781088b66b9e07b9c'
+  console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/7768835?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     if (cookie) {
@@ -72,7 +71,6 @@ async function run(){
     $.Token = ''
     $.Pin = ''
     await getCk()
-    await token()
     await getToken();
     if($.Token == ''){
       console.log('获取[token]失败！')
@@ -99,7 +97,7 @@ async function run(){
     let checkOpenCardData = await checkOpenCard();
     if (checkOpenCardData && !checkOpenCardData.allOpenCard) {
       let flag = true
-      for (let cardList1Element of checkOpenCardData.cardList3) {
+      for (let cardList1Element of checkOpenCardData.cardList1) {
         if(cardList1Element.status == 0){
           if(flag) console.log('组1')
           if(flag) flag = false
@@ -125,30 +123,16 @@ async function run(){
       checkOpenCardData = await checkOpenCard();
       await $.wait(1000)
     }
+    if(checkOpenCardData && checkOpenCardData.score1 == 1) await startDraw(1)
     if(checkOpenCardData && checkOpenCardData.score2 == 1) await startDraw(2)
-    if(checkOpenCardData && checkOpenCardData.score3 == 1) await startDraw(3)
-    $.log("浏览商品: " + $.visitSku)
-    if(!$.visitSku) await $.wait(1000)
-    for(let i of $.visitSkuList){
-      if(i.status === 0){
-        await saveTask('浏览商品', 5, i.value);
-        await insertCrmPageVisit("浏览商品"+i.value)
-        await writePersonInfo()
-        await $.wait(parseInt(Math.random() * 1000 + 2000, 10));
-      }
-    }
     $.log("关注: " + $.followShop)
-    if(!$.followShop) await saveTask('关注', 23, 23);
+    if(!$.followShop) await followShop();
     if(!$.followShop) await $.wait(1000)
-    $.log("签到: " + $.sign)
-    if(!$.sign) await saveTask('签到', 0, 1000098686);
-    if(!$.sign) await $.wait(1000)
     $.log("加购: " + $.addSku)
-    if(!$.addSku && guaopencard_addSku+"" != "true") console.log('如需加购请设置环境变量[guaopencard_addSku14]为"true"');
-    if(!$.addSku && guaopencard_addSku == "true") await saveTask('加购', 21, 21);
+    if(!$.addSku && guaopencard_addSku+"" != "true") console.log('如需加购请设置环境变量[guaopencard_addSku12]为"true"');
+    if(!$.addSku && guaopencard_addSku == "true") await addSku();
     if(!$.addSku && guaopencard_addSku == "true") await $.wait(1000)
     await getActorUuid()
-    console.log(`共${$.score}清爽值 剩余${$.score1} ${$.score5}次游戏机会`)
     await $.wait(1000)
     await getDrawRecordHasCoupon()
     await $.wait(1000)
@@ -226,72 +210,63 @@ function getShareRecord() {
     })
   })
 }
-function writePersonInfo() {
+
+function addSku() {
   return new Promise(resolve => {
-    let body = `jdActivityId=${$.jdActivityId}&pin=${encodeURIComponent($.Pin)}&actionType=5&venderId=0&activityId=${$.activityId}`
-    $.post(taskPostUrl('/interaction/write/writePersonInfo', body), async (err, resp, data) => {
+    let body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}&actorUuid=${$.actorUuid}&shareUuid=${$.shareUuid}&taskType=2&taskValue=100022610206`
+    $.post(taskPostUrl('/dingzhi/dz/openCard/saveTask', body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${$.toStr(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function insertCrmPageVisit(elementId) {
-  return new Promise(resolve => {
-    let body = `venderId=${$.venderId}&elementId=${elementId}&pageId=${$.activityId}&pin=${encodeURIComponent($.Pin)}`
-    $.post(taskPostUrl('/crm/pageVisit/insertCrmPageVisit', body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${$.toStr(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-
-
-function saveTask(title, taskType, taskValue) {
-  return new Promise(resolve => {
-    let body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}&actorUuid=${$.actorUuid}&taskType=${taskType}&taskValue=${taskValue}`
-    $.post(taskPostUrl('/dingzhi/openCard/summer/saveTask', body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${$.toStr(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          // console.log(data)
-          let res = $.toObj(data);
+          res = $.toObj(data);
           if(typeof res == 'object'){
             if(res.result === true && res.data){
               let msg = ''
-              if(res.data.beanNub){
-                msg = `${res.data.beanNub}京豆`
+              if(res.data.addBeanNum){
+                msg = `${res.data.addBeanNum}京豆`
               }
-              if(res.data.addscore){
-                msg += ` ${res.data.addscore}清爽值`
-              }
-              if(res.data.addScore5){
-                msg += ` ${res.data.addScore5}次游戏机会`
-              }
-              console.log(`${title}获得：${ msg || '空气💨'}`)
+              console.log(`加购获得：${ msg || '空气💨'}`)
             }else if(typeof res == 'object' && res.errorMessage){
-              console.log(`${title} ${res.errorMessage || ''}`)
+              console.log(`加购 ${res.errorMessage || ''}`)
+            }else{
+              console.log(data)
+            }
+          }else{
+            console.log(data)
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function followShop() {
+  return new Promise(resolve => {
+    let body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}&actorUuid=${$.actorUuid}&shareUuid=${$.shareUuid}&taskType=23&taskValue=1000376745`
+    $.post(taskPostUrl('/dingzhi/dz/openCard/followShop', body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${$.toStr(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          res = $.toObj(data);
+          if(typeof res == 'object'){
+            if(res.result === true && res.data){
+              let msg = ''
+              if(res.data.addBeanNum){
+                msg = `${res.data.addBeanNum}京豆`
+              }
+              if(res.data.beanNumMember && res.data.assistSendStatus){
+                msg += ` 额外获得:${res.data.beanNumMember}京豆`
+              }
+              console.log(`关注获得：${ msg || '空气💨'}`)
+            }else if(typeof res == 'object' && res.errorMessage){
+              console.log(`关注 ${res.errorMessage || ''}`)
             }else{
               console.log(data)
             }
@@ -336,7 +311,7 @@ function shopactivityId(functionId) {
       'accept': '*/*',
       'User-Agent': $.UA,
       'content-type': 'application/x-www-form-urlencoded',
-      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
+      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/7768835?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       'Cookie': cookie
     }
   }
@@ -349,7 +324,7 @@ function join(venderId) {
     $.get(ruhui(`${venderId}`), async (err, resp, data) => {
       try {
         // console.log(data)
-        let res = $.toObj(data);
+        res = $.toObj(data);
         if(typeof res == 'object'){
           if(res.success === true){
             console.log(res.message)
@@ -386,7 +361,7 @@ function ruhui(functionId) {
       'accept': '*/*',
       'User-Agent': $.UA,
       'content-type': 'application/x-www-form-urlencoded',
-      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
+      'Referer': `https://shopmember.m.jd.com/shopcard/?venderId=${functionId}&shopId=${functionId}&venderType=5&channel=401&returnUrl=https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/7768835?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       'Cookie': cookie
     }
   }
@@ -395,14 +370,14 @@ function ruhui(functionId) {
 function startDraw(type) {
   return new Promise(resolve => {
     let body = `activityId=${$.activityId}&actorUuid=${$.actorUuid}&pin=${encodeURIComponent($.Pin)}&type=${type}`
-    $.post(taskPostUrl('/dingzhi/openCard/summer/startDraw', body), async (err, resp, data) => {
+    $.post(taskPostUrl('/dingzhi/dz/openCard/startDraw', body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${$.toStr(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           // $.log($.toStr(data))
-          let res = $.toObj(data);
+          res = $.toObj(data);
           if(typeof res == 'object'){
             if(res.result === true && res.data){
               console.log(`抽奖获得：${res.data.drawOk && res.data.name || '空气💨'}`)
@@ -470,24 +445,18 @@ function drawContent() {
 function getActorUuid() {
   return new Promise(resolve => {
     let body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}&pinImg=${encodeURIComponent($.attrTouXiang)}&nick=${encodeURIComponent($.nickname)}&cjyxPin=&cjhyPin=&shareUuid=${$.shareUuid}`
-    $.post(taskPostUrl('/dingzhi/openCard/summer/activityContent',body), async(err, resp, data) => {
+    $.post(taskPostUrl('/dingzhi/dz/openCard/activityContent',body), async(err, resp, data) => {
       try {
         if (err) {
           console.log(`${$.toStr(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           // console.log(data)
-          let res = $.toObj(data);
+          res = $.toObj(data);
           if(typeof res == 'object' && res.result === true){
             if(typeof res.data.followShop.allStatus != 'undefined') $.followShop = res.data.followShop.allStatus
             if(typeof res.data.addSku.allStatus != 'undefined') $.addSku = res.data.addSku.allStatus
-            if(typeof res.data.sign.allStatus != 'undefined') $.sign = res.data.sign.allStatus
-            if(typeof res.data.visitSku.allStatus != 'undefined') $.visitSku = res.data.visitSku.allStatus
-            if(typeof res.data.visitSku.settings != 'undefined') $.visitSkuList = res.data.visitSku.settings
             if(typeof res.data.actorUuid != 'undefined') $.actorUuid = res.data.actorUuid
-            if(typeof res.data.score5 != 'undefined') $.score5 = res.data.score5
-            if(typeof res.data.score != 'undefined') $.score = res.data.score
-            if(typeof res.data.score1 != 'undefined') $.score1 = res.data.score1
           }else if(typeof res == 'object' && res.errorMessage){
             console.log(`activityContent ${res.errorMessage || ''}`)
           }else{
@@ -511,7 +480,7 @@ function getUserInfo() {
           console.log(`${$.toStr(err)}`)
           console.log(`${$.name} getUserInfo API请求失败，请检查网路重试`)
         } else {
-          let res = $.toObj(data);
+          res = $.toObj(data);
           if(typeof res == 'object' && res.result === true){
             if(res.data && typeof res.data.yunMidImageUrl != 'undefined') $.attrTouXiang = res.data.yunMidImageUrl || "https://img10.360buyimg.com/imgzone/jfs/t1/7020/27/13511/6142/5c5138d8E4df2e764/5a1216a3a5043c5d.png"
           }else if(typeof res == 'object' && res.errorMessage){
@@ -531,7 +500,7 @@ function getUserInfo() {
 
 function accessLogWithAD() {
   return new Promise(resolve => {
-    let pageurl = `https://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=${$.activityId}&shareUuid=${$.shareUuid}`
+    let pageurl = `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/7768835?activityId=${$.activityId}&shareUuid=${$.shareUuid}`
     let body = `venderId=${$.shopId || $.venderId}&code=99&pin=${encodeURIComponent($.Pin)}&activityId=${$.activityId}&pageUrl=${encodeURIComponent(pageurl)}&subType=APP&adSource=null`
     $.post(taskPostUrl('/common/accessLogWithAD',body), async(err, resp, data) => {
       try {
@@ -598,15 +567,13 @@ function getSimpleActInfoVo() {
     $.post(taskPostUrl('/dz/common/getSimpleActInfoVo',body), async(err, resp, data) => {
       try {
         if (err) {
-          console.log(`${$.toStr(err)}`)
+          console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} getSimpleActInfoVo API请求失败，请检查网路重试`)
         } else {
-          // console.log(data)
-          let res = $.toObj(data);
+          res = $.toObj(data);
           if(typeof res == 'object' && res.result === true){
             if(typeof res.data.shopId != 'undefined') $.shopId = res.data.shopId
             if(typeof res.data.venderId != 'undefined') $.venderId = res.data.venderId
-            if(typeof res.data.jdActivityId != 'undefined') $.jdActivityId = res.data.jdActivityId
           }else if(typeof res == 'object' && res.errorMessage){
             console.log(`getSimpleActInfoVo ${res.errorMessage || ''}`)
           }else{
@@ -655,52 +622,10 @@ function getToken() {
     })
   })
 }
-function token() {
-  return new Promise(resolve => {
-    let get = {
-      url:`https://lzdz1-isv.isvjcloud.com/wxCommonInfo/token`,
-      headers: {
-        "Cookie": `${activityCookie} ${cookie}`,
-        "Referer":`https://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
-        "User-Agent": $.UA,
-      }
-    }
-    $.get(get, async(err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${$.toStr(err)}`)
-          console.log(`${$.name} cookie API请求失败，请检查网路重试`)
-        } else {
-          let LZ_TOKEN_KEY = ''
-          let LZ_TOKEN_VALUE = ''
-          let setcookies = resp['headers']['set-cookie'] || resp['headers']['Set-Cookie'] || ''
-          let setcookie = ''
-          if(setcookies){
-            if(typeof setcookies != 'object'){
-              setcookie = setcookies.split(',')
-            }else setcookie = setcookies
-            for (let ck of setcookie) {
-              let name = ck.split(";")[0].trim()
-              if(name.split("=")[1]){
-                if(name.indexOf('LZ_TOKEN_KEY=')>-1) LZ_TOKEN_KEY = name.replace(/ /g,'')+';'
-                if(name.indexOf('LZ_TOKEN_VALUE=')>-1) LZ_TOKEN_VALUE = name.replace(/ /g,'')+';'
-              }
-            }
-          }
-          if(LZ_TOKEN_KEY && LZ_TOKEN_VALUE) activityCookie = `${LZ_TOKEN_KEY} ${LZ_TOKEN_VALUE}`
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
 function getCk() {
   return new Promise(resolve => {
     let get = {
-      url:`https://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
+      url:`https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/7768835?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       headers: {
         "Cookie": cookie,
         "User-Agent": $.UA,
@@ -753,7 +678,7 @@ function taskPostUrl(url, body) {
       "Host": "lzdz1-isv.isvjcloud.com",
       "Origin": "https://lzdz1-isv.isvjcloud.com",
       "X-Requested-With": "XMLHttpRequest",
-      "Referer": `https://lzdz1-isv.isvjcloud.com/lzclient/dz/2021jan/eliminateGame/0816eliminate/?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
+      "Referer": `https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity/7768835?activityId=${$.activityId}&shareUuid=${$.shareUuid}`,
       "User-Agent": $.UA ,
     }
   }

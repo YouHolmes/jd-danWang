@@ -58,10 +58,16 @@
 1 0,6,12,15,18 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #京喜首页签到
 20 1,8 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
-#jd_olympic_opencard2
+#jd_opencard_sum2
 50 0,18,22 * * * node /scripts/jd_opencard_sum2.js >> /scripts/logs/jd_opencard_sum2.log 2>&1
-#jd_olympic_opencard2
+#jd_opencard_Daddy
 40 0,18,22 * * * node /scripts/jd_opencard_Daddy.js >> /scripts/logs/jd_opencard_Daddy.log 2>&1
+#jd_olympic
+10 0,18,22 * * * node /scripts/jd_olympic.js >> /scripts/logs/jd_olympic.log 2>&1
+#jd_opencard
+10 0,18,22 * * * node /scripts/jd_opencard.js >> /scripts/logs/jd_opencard.log 2>&1
+#jd_opencard2
+10 0,18,22 * * * node /scripts/jd_opencard2.js >> /scripts/logs/jd_opencard2.log 2>&1
 #特物
 30 11,17 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #jd_qixi
@@ -88,6 +94,8 @@
 15 0,9,18,22 * * * node /scripts/jd_xiaolong.js >> /scripts/logs/jd_xiaolong.log 2>&1
 # 金机奖投票
 33 1,6,9 8-20 8 * node /scripts/jd_jinji.js >> /scripts/logs/jd_jinji.log 2>&1
+# 工业品抽奖机
+10 0 * * * node /scripts/jd_industryLottery.js >> /scripts/logs/jd_industryLottery.log 2>&1
 
 ##############长期活动##############
 # 签到
