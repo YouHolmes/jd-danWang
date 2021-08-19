@@ -30,7 +30,6 @@ if ($.isNode()) {
     cookiesArr.push(jdCookieNode[item])
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
-  if (JSON.stringify(process.env).indexOf('GITHUB') > -1) process.exit(0)
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
@@ -242,7 +241,7 @@ function getAuthorShareCode(url) {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = ['3027a88b-f630-4c62-b39b-6468208a22e4','1ca791f5-42e1-4c09-b77f-a16810b71e6e','e8766535-ef45-4fcb-833d-5397b7789745','aa6df314-1245-4963-a140-34c9899d2cd6'];
+    $.newShareCodes = ['cf5a607d-01c8-472a-9e85-27d19e744d11','10bf2076-9d36-4bf5-9352-0eb6fb3cb253','28927217-727a-405e-a356-bec60fa3e21f','ef2dc135-57ca-4fd6-baf4-a585c8c8deee'];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
     }/* else {
