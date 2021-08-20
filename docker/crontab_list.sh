@@ -35,7 +35,7 @@
 #天天优惠大乐透
 25 6 * * * node /scripts/jd_DrawEntrance.js >> /scripts/logs/jd_DrawEntrance.log 2>&1
 #众筹许愿池
-20 12 * * * node /scripts/jd_wishingPool.js >> /scripts/logs/jd_wishingPool.log 2>&1
+20 7,13 * * * node /scripts/jd_hwsx.js >> /scripts/logs/jd_hwsx.log 2>&1
 #汪汪乐园
 30 */4 * * * node /scripts/jd_joy_park.js >> /scripts/logs/jd_joy_park.log 2>&1
 #新签到
