@@ -94,8 +94,6 @@
 15 0,9,18,22 * * * node /scripts/jd_xiaolong.js >> /scripts/logs/jd_xiaolong.log 2>&1
 # 金机奖投票
 33 1,6,9 8-20 8 * node /scripts/jd_jinji.js >> /scripts/logs/jd_jinji.log 2>&1
-# 工业品抽奖机
-10 0 * * * node /scripts/jd_industryLottery.js >> /scripts/logs/jd_industryLottery.log 2>&1
 
 ##############长期活动##############
 # 签到
@@ -129,7 +127,7 @@
 # 天天提鹅
 18 * * * * node /scripts/jd_daily_egg.js >> /scripts/logs/jd_daily_egg.log 2>&1
 # 金融养猪
-12 */2 * * * node /scripts/jd_pigPet.js >> /scripts/logs/jd_pigPet.log 2>&1
+12 */2 * * * node /scripts/jd_pigPet.js >> /scripts/los/jd_pigPet.log 2>&1
 # 点点券
 23 0,7,20 * * * node /scripts/jd_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
 # 京喜工厂
