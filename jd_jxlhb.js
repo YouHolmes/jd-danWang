@@ -73,6 +73,14 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     $.canHelp = true;
     $.max = false;
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+    if ($.canHelp) {
+      for (let item of $.authorMyShareIds) {
+        if (!item) continue;
+        if (!$.canHelp) break
+        await enrollFriend(item);
+        await $.wait(2500);
+      }
+    }
      for (let code of $.packetIdArr) {
        if (!code) continue;
        if ($.UserName === code['userName']) continue;
@@ -82,16 +90,6 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
        await enrollFriend(code['strUserPin']);
        await $.wait(2500);
      }
-    /*if ($.canHelp) {
-      console.log(`\n【${$.UserName}】有剩余助力机会，开始助力作者\n`)
-      for (let item of $.authorMyShareIds) {
-        if (!item) continue;
-        if (!$.canHelp) break
-        console.log(`【${$.UserName}】去助力作者的邀请码：${item}`);
-        await enrollFriend(item);
-        await $.wait(2500);
-      }
-    }*/
   }
   //拆红包
   for (let i = 0; i < cookiesArr.length; i++) {
