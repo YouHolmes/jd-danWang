@@ -92,8 +92,6 @@
 30 8,9 * * * node /scripts/jd_productZ4Brand.js >> /scripts/logs/jd_productZ4Brand.log 2>&1
 #jd_xiaolong
 15 0,9,18,22 * * * node /scripts/jd_xiaolong.js >> /scripts/logs/jd_xiaolong.log 2>&1
-# 金机奖投票
-33 1,6,9 8-20 8 * node /scripts/jd_jinji.js >> /scripts/logs/jd_jinji.log 2>&1
 
 ##############长期活动##############
 # 签到
