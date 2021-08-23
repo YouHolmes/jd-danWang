@@ -150,7 +150,7 @@ async function PrizeIndex() {
       if ($.totalBlue > $.blueCost) {
         for (let j = 0; j <= 10; j++) {
           await smtg_obtainPrize(prizeList[1].prizeId);
-          if ($.errBizCodeCount >= 3) break
+          if ($.errBizCodeCount >= 20) break
         }
       } else {
         console.log(`兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`);
@@ -179,7 +179,7 @@ async function PrizeIndex() {
       if ($.totalBlue > $.blueCost) {
         for (let j = 0; j <= 10; j++) {
           await smtg_obtainPrize(prizeList[0].prizeId, 1000);
-          if ($.errBizCodeCount >= 3) break
+          if ($.errBizCodeCount >= 20) break
         }
       } else {
         console.log(`兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`);
@@ -213,12 +213,12 @@ async function PrizeIndex() {
           if ($.type === 4 && !$.beanType) {
             for (let j = 0; j <= 10; j++) {
               await smtg_obtainPrize(prizeId, 0, "smtg_lockMaterialPrize")
-              if ($.errBizCodeCount >= 3) break
+              if ($.errBizCodeCount >= 20) break
             }
           } else {
             for (let j = 0; j <= 10; j++) {
               await smtg_obtainPrize(prizeId);
-              if ($.errBizCodeCount >= 3) break
+              if ($.errBizCodeCount >= 20) break
             }
           }
         } else {

@@ -13,7 +13,9 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appId = '1E1NXxq0';
+let appIdArr = ['1E1NXxq0', '1E1xVyqw'];
+let appNameArr = ['众筹许愿池', '开学充电站'];
+let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -46,28 +48,40 @@ if ($.isNode()) {
         }
         continue
       }
-      await jd_wish();
+      for (let j = 0; j < appIdArr.length; j++) {
+        appId = appIdArr[j]
+        appName = appNameArr[j]
+        console.log(`开始第${j + 1}个活动：${appName}\n`)
+        await jd_wish();
+      }
     }
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.canHelp = true
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       console.log(`开始内部助力\n`)
-      for (let j = 0; j < $.shareCode.length && $.canHelp; j++) {
-        console.log(`${$.UserName} 去助力 ${$.shareCode[j].use} 的助力码 ${$.shareCode[j].code}`)
-        if ($.UserName == $.shareCode[j].use) {
-          console.log(`不能助力自己\n`)
-          continue
-        }
-        $.delcode = false
-        await harmony_collectScore({"appId":appId,"taskToken":$.shareCode[j].code,"actionType":"0","taskId":"6"})
-        await $.wait(2000)
-        if ($.delcode) {
-          $.shareCode.splice(j, 1)
-          j--
-          continue
+      for (let v = 0; v < appIdArr.length; v++) {
+        $.canHelp = true
+        appId = appIdArr[v]
+        appName = appNameArr[v]
+        console.log(`开始助力第${v + 1}个活动：${appName}\n`)
+        for (let j = 0; j < $.shareCode.length && $.canHelp; j++) {
+          if ($.shareCode[j].appId === appId) {
+            console.log(`${$.UserName} 去助力 ${$.shareCode[j].use} 的助力码 ${$.shareCode[j].code}`)
+            if ($.UserName == $.shareCode[j].use) {
+              console.log(`不能助力自己\n`)
+              continue
+            }
+            $.delcode = false
+            await harmony_collectScore({"appId":appId,"taskToken":$.shareCode[j].code,"actionType":"0","taskId":"6"})
+            await $.wait(2000)
+            if ($.delcode) {
+              $.shareCode.splice(j, 1)
+              j--
+              continue
+            }
+          }
         }
       }
     }
@@ -89,9 +103,9 @@ async function jd_wish() {
     await $.wait(2000)
 
     if (forNum === 0) {
-      console.log(`\n没有抽奖机会\n`)
+      console.log(`没有抽奖机会\n\n`)
     } else {
-      console.log(`\n可以抽奖${forNum}次，去抽奖\n`)
+      console.log(`可以抽奖${forNum}次，去抽奖\n\n`)
     }
 
     for (let j = 0; j < forNum; j++) {
@@ -118,7 +132,7 @@ async function healthyDay_getHomeData(type = true) {
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
                 if (vo.status !== 2) {
-                  if (vo.taskType === 13) {
+                  if (vo.taskType === 13 || vo.taskType === 12) {
                     console.log(`签到`)
                     await harmony_collectScore({"appId":appId,"taskToken":vo.simpleRecordInfoVo.taskToken,"taskId":vo.taskId,"actionType":"0"}, vo.taskType)
                   } else if (vo.taskType === 1) {
@@ -152,10 +166,11 @@ async function healthyDay_getHomeData(type = true) {
                       }
                     }
                   } else if (vo.taskType === 14) {
-                    console.log(`【京东账号${$.index}（${$.UserName}）的众筹许愿池好友互助码】${vo.assistTaskDetailVo.taskToken}\n`)
+                    console.log(`【京东账号${$.index}（${$.UserName}）的${appName}好友互助码】${vo.assistTaskDetailVo.taskToken}\n`)
                     if (vo.times !== vo.maxTimes) {
                       $.shareCode.push({
                         "code": vo.assistTaskDetailVo.taskToken,
+                        "appId": appId,
                         "use": $.UserName
                       })
                     }
@@ -227,6 +242,8 @@ function interact_template_getLotteryResult() {
             let userAwardsCacheDto = data.data.result.userAwardsCacheDto
             if (userAwardsCacheDto && userAwardsCacheDto.type === 2) {
               console.log(`抽中：${userAwardsCacheDto.jBeanAwardVo.quantity}${userAwardsCacheDto.jBeanAwardVo.ext}`)
+            } else if (userAwardsCacheDto && userAwardsCacheDto.type === 0) {
+              console.log(`很遗憾未中奖~`)
             } else {
               console.log(JSON.stringify(data))
             }

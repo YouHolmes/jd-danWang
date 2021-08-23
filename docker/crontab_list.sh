@@ -65,9 +65,11 @@
 #jd_olympic
 10 0,18,22 * * * node /scripts/jd_olympic.js >> /scripts/logs/jd_olympic.log 2>&1
 #jd_opencard
-10 0,18,22 * * * node /scripts/jd_opencard.js >> /scripts/logs/jd_opencard.log 2>&1
+20 0,18,22 * * * node /scripts/jd_opencard.js >> /scripts/logs/jd_opencard.log 2>&1
 #jd_opencard2
-10 0,18,22 * * * node /scripts/jd_opencard2.js >> /scripts/logs/jd_opencard2.log 2>&1
+30 0,18,22 * * * node /scripts/jd_opencard2.js >> /scripts/logs/jd_opencard2.log 2>&1
+#jd_opencard10
+50 0,8 * * * node /scripts/jd_opencard10.js >> /scripts/logs/jd_opencard10.log 2>&1
 #特物
 30 11,17 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #jd_qixi
@@ -78,8 +80,6 @@
 0 0,12,18,21 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 手机狂欢城助力(8.9-8.28)
 10 0,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
-# 荣耀换新季
-0 1 * * * node /scripts/jd_ryhxj.js >> /scripts/logs/jd_ryhxj.log 2>&1
 # 来电好物季
 10 1 * * * node /scripts/jd_ldhwj.js >> /scripts/logs/jd_ldhwj.log 2>&1
 # 京小鸽吾悦寄
