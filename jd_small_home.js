@@ -48,7 +48,7 @@ const JD_API_HOST = 'https://lkyl.dianpusoft.cn/api';
         }
         continue
       }
-      await smallHome();
+      await smallHome(i);
     }
   }
   //await updateInviteCodeCDN('https://cdn.jsdelivr.net/gh/shuyeshuye/updateTeam@master/jd_updateSmallHomeInviteCode.json');
@@ -58,10 +58,10 @@ const JD_API_HOST = 'https://lkyl.dianpusoft.cn/api';
       $.token = $.helpToken[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
       if ($.newShareCodes.length > 1) {
-        console.log('----', (i + 1) % $.newShareCodes.length)
-        let code = $.newShareCodes[(i + 1) % $.newShareCodes.length]['code']
-        console.log(`\n${$.UserName} 去给自己的下一账号 ${decodeURIComponent($.newShareCodes[(i + 1) % $.newShareCodes.length]['cookie'].match(/pt_pin=(.+?);/) && $.newShareCodes[(i + 1) % $.newShareCodes.length]['cookie'].match(/pt_pin=(.+?);/)[1])}助力，助力码为 ${code}\n`)
-        await createAssistUser(code, $.createAssistUserID);
+        for (let j = 0; j < $.newShareCodes.length; j++) {
+          let code = $.newShareCodes[j]['code']
+          await createAssistUser(code, $.createAssistUserID);
+        }
       }
       //console.log(`\n去帮助作者\n`)
       //await helpFriends();
@@ -74,12 +74,14 @@ const JD_API_HOST = 'https://lkyl.dianpusoft.cn/api';
     .finally(() => {
       $.done();
     })
-async function smallHome() {
+async function smallHome(i) {
   await loginHome();
   await ssjjRooms();
   // await helpFriends();
   if (!$.isUnLock) return;
-  await createInviteUser();
+  if (i < 8) {
+    await createInviteUser();
+  }
   await queryDraw();
   await lottery();
   await doAllTask();
