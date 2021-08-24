@@ -51,11 +51,10 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
   let res2 = []
   if (res && res.activeId) $.activeId = res.activeId;
   $.authorMyShareIds = [
-      'iX6-C8t-uAMaCzOdz3gabbXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
-      'iX6-C8t-uAMaCzOdz3gabbYuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
-      'iX6-C8t-uAMaCzOdz3gabeVQbRLnjNiIvo1VWb1p88yHJ2KOdD5ZkCoAQAyokddD',
-      'iX6-C8t-uAMaCzOdz3gabVkzLxn5yhHOFGOS8XikJkpVB501dohOJ1sZ5YGaBVRY',
-      'iX6-C8t-uAMaCzOdz3gabT8zz_JTVkF7jqIVUaNPBdxhqu5aVIPUU_vmOG9wiYyZ'
+      'Aj_XSN4WWr_ekyJF1TFlaLXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
+      'Aj_XSN4WWr_ekyJF1TFlaLYuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
+      'Aj_XSN4WWr_ekyJF1TFlaOVQbRLnjNiIvo1VWb1p88yHJ2KOdD5ZkCoAQAyokddD',
+      'Aj_XSN4WWr_ekyJF1TFlaD8zz_JTVkF7jqIVUaNPBdxhqu5aVIPUU_vmOG9wiYyZ'
   ]
   //开启红包,获取互助码
   for (let i = 0; i < cookiesArr.length; i++) {
