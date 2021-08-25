@@ -74,16 +74,16 @@ if ($.isNode()) {
     }
     UA = `jdpingou;iPhone;4.13.0;14.4.2;${randomString(40)};network/wifi;model/iPhone10,2;appBuild/100609;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/1;hasOCPay/0;supportBestPay/0;session/${Math.random * 98 + 1};pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`
     token = await getJxToken()
-    await pasture();
+    await pasture(i);
     await $.wait(2000);
     UAInfo[$.UserName] = UA
   }
   console.log('\n##################开始账号内互助#################\n');
   let codeList = [];
-  for (let i = 0; i < $.helpCkList.length; i++) {
-    $.cookie = $.helpCkList[i];
-    $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-    for (let k = 0; k < $.inviteCodeList.length; k++) {
+  for (let k = 0; k < $.inviteCodeList.length; k++) {
+    for (let i = 0; i < $.helpCkList.length; i++) {
+      $.cookie = $.helpCkList[i];
+      $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
       if ($.UserName === $.inviteCodeList[k].use) {
         codeList.push({
           'name': $.UserName,
@@ -113,7 +113,7 @@ if ($.isNode()) {
     $.done();
   })
 
-async function pasture() {
+async function pasture(i) {
   try {
     $.homeInfo = {};
     $.petidList = [];
@@ -129,13 +129,15 @@ async function pasture() {
       console.log('获取活动信息成功');
       console.log(`互助码：${$.homeInfo.sharekey}`);
       $.helpCkList.push($.cookie);
-      $.inviteCodeList.push(
-        {
-          'use':$.UserName,
-          'code':$.homeInfo.sharekey,
-          'max':false
-        }
-      );
+      if (i < 11) {
+        $.inviteCodeList.push(
+            {
+              'use':$.UserName,
+              'code':$.homeInfo.sharekey,
+              'max':false
+            }
+        );
+      }
       for (let i = 0; i < $.homeInfo.petinfo.length; i++) {
         $.onepetInfo = $.homeInfo.petinfo[i];
         $.petidList.push($.onepetInfo.petid);
