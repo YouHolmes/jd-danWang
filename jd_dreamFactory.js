@@ -1379,7 +1379,7 @@ function readShareCode() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = ['PHTgiwCn7k5jOFr0_NqJPQ==','CntxZMVPRPrnRwDGEdKCng','nI0EvC7t1MQV_YTaQKS4cA==','jldY4DzQ4BTcnLVlbOYbhA==','Gy9KrAI8iGF03ENq55vY3w==','77U7hJcIxAsrYWfQPd3qAg==','npVP727-ATXQMoSbYwvfeg==','H-tO6oRBU8ge6ZKvLu_9Pw==','EaWE-_l2oW8vOmUB5qJ5Zg==','OpdZTI0kWvpwhhmKak9nTQ==','kYG2iukfwBw2HkULET49tg==','kRHuXQBCCRZ7B2EqX6RjuA==','y_pZE2xvUtJhxi78tmKZsg==','yrD7XOeiJi51-VNXVy3Ztw==','i4i9s_EF87Ypo-BMDbBJhA==','uyEXVo5BycEScPNEGulqgQ==','agd6qJEm9K1xAd64nwDHSQ=','B9Uta0hML0oe6qFcYcvWgp7h8m--7KHZL0Bn-jTS1_0='];
+    $.newShareCodes = ['Ug59BtTVgnz6fvHYoUGWLw==','nH1XR4jq2uzbYoB-1k_2wA==','PHTgiwCn7k5jOFr0_NqJPQ==','CntxZMVPRPrnRwDGEdKCng==','jvPgYjr4eezesZhIicoQRg==','nI0EvC7t1MQV_YTaQKS4cA==','jldY4DzQ4BTcnLVlbOYbhA==','Gy9KrAI8iGF03ENq55vY3w==','77U7hJcIxAsrYWfQPd3qAg==','npVP727-ATXQMoSbYwvfeg==','H-tO6oRBU8ge6ZKvLu_9Pw==','EaWE-_l2oW8vOmUB5qJ5Zg==','OpdZTI0kWvpwhhmKak9nTQ==','kYG2iukfwBw2HkULET49tg==','kRHuXQBCCRZ7B2EqX6RjuA==','y_pZE2xvUtJhxi78tmKZsg==','yrD7XOeiJi51-VNXVy3Ztw==','i4i9s_EF87Ypo-BMDbBJhA==','uyEXVo5BycEScPNEGulqgQ==','agd6qJEm9K1xAd64nwDHSQ=','B9Uta0hML0oe6qFcYcvWgp7h8m--7KHZL0Bn-jTS1_0='];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.newShareCodes.concat($.shareCodesArr[$.index - 1].split('@'));
     } /*else {
