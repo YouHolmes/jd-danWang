@@ -51,10 +51,10 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
   let res2 = []
   if (res && res.activeId) $.activeId = res.activeId;
   $.authorMyShareIds = [
-      'Aj_XSN4WWr_ekyJF1TFlaLXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
-      'Aj_XSN4WWr_ekyJF1TFlaLYuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
-      'Aj_XSN4WWr_ekyJF1TFlaOVQbRLnjNiIvo1VWb1p88yHJ2KOdD5ZkCoAQAyokddD',
-      'Aj_XSN4WWr_ekyJF1TFlaD8zz_JTVkF7jqIVUaNPBdxhqu5aVIPUU_vmOG9wiYyZ'
+      'edvLUTsWoANZ2R9thFtWnrXvsoti8HCABZPIJ813miF1Ffe2U484vy5GrKcjlRVW',
+      'edvLUTsWoANZ2R9thFtWnrYuhzpDG2JvKZPoeCdXkga6CFqL3I5pHkCvBKcgEhmt',
+      'edvLUTsWoANZ2R9thFtWnuVQbRLnjNiIvo1VWb1p88yHJ2KOdD5ZkCoAQAyokddD',
+      'edvLUTsWoANZ2R9thFtWnj8zz_JTVkF7jqIVUaNPBdxhqu5aVIPUU_vmOG9wiYyZ'
   ]
   //开启红包,获取互助码
   for (let i = 0; i < cookiesArr.length; i++) {
