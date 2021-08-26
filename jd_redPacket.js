@@ -42,7 +42,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     return;
   }
   let res = []
-  $.authorMyShareIds = [];
+  $.authorMyShareIds = []
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -71,7 +71,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
     $.canHelp = true;
     $.redPacketId = [...new Set($.redPacketId)];
-    if (cookiesArr && cookiesArr.length > 2) {
+    if (cookiesArr && cookiesArr.length >= 2) {
       console.log(`\n\n自己账号内部互助`);
       for (let item of $.redPacketId) {
         console.log(`账号 ${$.index} ${$.UserName} 开始给 ${item} 进行助力`)
@@ -223,11 +223,18 @@ async function doTask() {
 async function red() {
   $.hasSendNumber = 0;
   $.assistants = 0;
+  $.waitOpenTimes = 0;
   if ($.h5activityIndex && $.h5activityIndex.data && $.h5activityIndex.data['result']) {
     const rewards = $.h5activityIndex['data']['result']['rewards'] || [];
     $.hasSendNumber = $.h5activityIndex['data']['result']['hasSendNumber'];
-    if ($.h5activityIndex['data']['result']['assistants']) {
-      $.assistants = $.h5activityIndex['data']['result']['assistants'].length || 0;
+    if ($.h5activityIndex['data']['result']['redpacketConfigFillRewardInfo']) {
+      for (let key of Object.keys($.h5activityIndex['data']['result']['redpacketConfigFillRewardInfo'])) {
+        let vo = $.h5activityIndex['data']['result']['redpacketConfigFillRewardInfo'][key]
+        $.assistants += vo.hasAssistNum
+        if (vo.packetStatus === 1) {
+          $.waitOpenTimes += 1
+        }
+      }
     }
   }
   if ($.h5activityIndex && $.h5activityIndex.data && $.h5activityIndex.data['biz_code'] === 10002) {
@@ -237,13 +244,11 @@ async function red() {
     //20001:红包活动正在进行，可拆
     const redPacketId = $.h5activityIndex['data']['result']['redpacketInfo']['id'];
     if (redPacketId) $.redPacketId.push(redPacketId);
-    console.log(`\n\n当前待拆红包ID:${$.h5activityIndex['data']['result']['redpacketInfo']['id']}，进度：再邀${$.h5activityIndex['data']['result']['requireAssistNum']}个好友，开第${$.hasSendNumber + 1}个红包。当前已拆红包：${$.hasSendNumber}个，剩余${$.h5activityIndex['data']['result']['remainRedpacketNumber']}个红包待开，已有${$.assistants}好友助力\n\n`)
-    const waitOpenTimes = $.h5activityIndex['data']['result']['redpacketInfo']['waitOpenTimes'] || 0;
-    console.log(`当前可拆红包个数：${waitOpenTimes}`)
-    if (waitOpenTimes > 0) {
-      for (let i = 0; i < new Array(waitOpenTimes).fill('').length; i++) {
-        if (!redPacketId) break
-        await h5receiveRedpacket(redPacketId);
+    console.log(`\n\n当前待拆红包ID:${$.h5activityIndex['data']['result']['redpacketInfo']['id']}，进度：再邀${$.h5activityIndex['data']['result']['redpacketConfigFillRewardInfo'][$.hasSendNumber]['requireAssistNum'] - $.h5activityIndex['data']['result']['redpacketConfigFillRewardInfo'][$.hasSendNumber]['hasAssistNum']}个好友，开第${$.hasSendNumber + 1}个红包。当前已拆红包：${$.hasSendNumber}个，剩余${$.h5activityIndex['data']['result']['remainRedpacketNumber']}个红包待开，已有${$.assistants}好友助力\n\n`)
+    console.log(`当前可拆红包个数：${$.waitOpenTimes}`)
+    if ($.waitOpenTimes > 0) {
+      for (let i = 0; i < $.waitOpenTimes; i++) {
+        await h5receiveRedpacketAll();
         await $.wait(500);
       }
     }
@@ -364,7 +369,7 @@ function taskReportForColor(taskType, detailId) {
 function receiveTaskRedpacket(taskType) {
   const body = {"clientInfo":{}, taskType};
   return new Promise((resolve) => {
-    $.post(taskUrl(arguments.callee.name.toString(), body), (err, resp, data) => {
+    $.post(taskUrl('h5receiveRedpacketAll', body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`\n${$.name}: API查询请求失败 ‼️‼️`);
@@ -414,11 +419,9 @@ function jinli_h5assist(redPacketId) {
     })
   })
 }
-//领取红包API,需token
-function h5receiveRedpacket(redPacketId) {
-  const data = {redPacketId};
-  data['token'] = $.md5($.md5("j" + JSON.stringify(data) + "D"))
-  const options = taskUrl(arguments.callee.name.toString(), data)
+//领取红包API
+function h5receiveRedpacketAll() {
+  const options = taskUrl(arguments.callee.name.toString(), {"clientInfo":{}})
   return new Promise((resolve) => {
     $.post(options, (err, resp, data) => {
       try {
@@ -603,10 +606,11 @@ function getAuthorShareCode(url) {
     })
   })
 }
-function taskUrl(functionId, body) {
+
+function taskUrl(functionId, body = {}) {
   return {
-    url: `${JD_API_HOST}?appid=jd_mp_h5&functionId=${functionId}&loginType=2&client=jd_mp_h5&t=${new Date().getTime() * 1000}`,
-    body: `body=${JSON.stringify(body)}`,
+    url: `${JD_API_HOST}?appid=jinlihongbao&functionId=${functionId}&loginType=2&client=jinlihongbao&clientVersion=10.1.0&osVersion=iOS&d_brand=iPhone&d_model=iPhone&t=${new Date().getTime() * 1000}`,
+    body: `body=${escape(JSON.stringify(body))}`,
     headers: {
       "Host": "api.m.jd.com",
       "Content-Type": "application/x-www-form-urlencoded",
@@ -617,7 +621,7 @@ function taskUrl(functionId, body) {
       "Accept": "*/*",
       "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
       "Referer": "https://happy.m.jd.com/babelDiy/zjyw/3ugedFa7yA6NhxLN5gw2L3PF9sQC/index.html",
-      "Content-Length": "36",
+      "Content-Length": "56",
       "Accept-Language": "zh-cn"
     }
   }
