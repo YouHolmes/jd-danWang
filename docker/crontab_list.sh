@@ -55,7 +55,7 @@
 #全民抢京豆
 #1 0,1 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
 #京喜领88元红包
-1 6,12,15,18 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+1 10,12,15,18 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #京喜首页签到
 20 1,8 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
 #jd_opencard_sum2
