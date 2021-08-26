@@ -62,12 +62,8 @@
 50 0,18,22 * * * node /scripts/jd_opencard_sum2.js >> /scripts/logs/jd_opencard_sum2.log 2>&1
 #jd_opencard_Daddy
 40 0,18,22 * * * node /scripts/jd_opencard_Daddy.js >> /scripts/logs/jd_opencard_Daddy.log 2>&1
-#jd_olympic
-10 0,18,22 * * * node /scripts/jd_olympic.js >> /scripts/logs/jd_olympic.log 2>&1
 #jd_opencard
 20 0,18,22 * * * node /scripts/jd_opencard.js >> /scripts/logs/jd_opencard.log 2>&1
-#jd_opencard2
-30 0,18,22 * * * node /scripts/jd_opencard2.js >> /scripts/logs/jd_opencard2.log 2>&1
 #jd_opencard10
 50 0,8 * * * node /scripts/jd_opencard10.js >> /scripts/logs/jd_opencard10.log 2>&1
 #特物
