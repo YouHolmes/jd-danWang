@@ -72,10 +72,6 @@
 0 0,9,18 * * * node /scripts/jd_qixi.js >> /scripts/logs/jd_qixi.log 2>&1
 #女装盲盒
 54 9,14 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
-# 手机狂欢城(8.9-8.28)
-0 0,12,18,21 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
-# 手机狂欢城助力(8.9-8.28)
-10 0,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
 # 来电好物季
 10 1 * * * node /scripts/jd_ldhwj.js >> /scripts/logs/jd_ldhwj.log 2>&1
 # 京小鸽吾悦寄
